@@ -26,14 +26,11 @@ Esta sección resume todos los entregables esperados y su status: completado/fal
 
 ### 1. Control del Proyecto
 
-- [ ] Plan de Trabajo en Excel
-
-**[Plan de Trabajo](https://itam2-my.sharepoint.com/:x:/g/personal/mauricia_pena_itam_mx/EZKX-tA5iQBDp5gFwEEe9qUBdBMM6JRz1Fy_mODThtlhSA?e=6CQH8m)**
+- [ ] Plan de Trabajo en Excel. **[Plan de Trabajo](https://itam2-my.sharepoint.com/:x:/g/personal/mauricia_pena_itam_mx/EZKX-tA5iQBDp5gFwEEe9qUBdBMM6JRz1Fy_mODThtlhSA?e=6CQH8m)**
 
 ### 2. Requerimientos de Negocio
 
-- [ ] Documento de Requerimientos de Negocio en formato tabular simple.
-**[Reglas de Negocio](docs/reglas_negocio.md)**
+- [ ] Documento de Requerimientos de Negocio en formato tabular simple. **[Reglas de Negocio](docs/reglasDeNegocio.md)**
 - [ ] Requerimientos no funcionales: Volumetrics (Cantidad esperada y máxima de transacciones y de qué tipo)
 - [ ] Reglas de Negocio
 
