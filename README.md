@@ -35,8 +35,8 @@ Esta sección resume todos los entregables esperados y su status: completado/fal
 
 ### 3. **Casos de Uso / Historias de Usuario**
 
-- [ ] Happy Path
-- [ ] Rutas Alternas para Reglas de Negocio
+- [ ] Happy Path **[Happy Paths](docs/happyPaths.md)**
+- [ ] Rutas Alternas para Reglas de Negocio **[Rutas Alternas](docs/rutasAlternas.md)**
 
 ### 4. **Documento de Arquitectura**
 
