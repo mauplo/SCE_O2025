@@ -33,6 +33,7 @@ Esta sección resume todos los entregables esperados y su status: completado/fal
 ### 2. Requerimientos de Negocio
 
 - [ ] Documento de Requerimientos de Negocio en formato tabular simple.
+**[Reglas de Negocio](docs/reglas_negocio.md)**
 - [ ] Requerimientos no funcionales: Volumetrics (Cantidad esperada y máxima de transacciones y de qué tipo)
 - [ ] Reglas de Negocio
 
