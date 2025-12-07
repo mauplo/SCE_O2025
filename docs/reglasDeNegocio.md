@@ -2,7 +2,7 @@
 
 | ID  | Regla de Negocio | Descripción |
 |-----|------------------|-------------|
-| RN1 | Identificación de Usuarios | Los usuarios a atender deben estar registrados en el medio de pago con un **idCliente único** |
+| RN1 | Identificación de Usuarios | Los usuarios deben estar registrados en el medio de pago con un **idCliente único**. |
 | RN2 | Identificación de Productos | Los estambres en el almacen debe estar registrado con un **idProd único**, incluyendo color, grosor, tipo de fibra y lote. |
 | RN3 | Formato de Pedidos | Los pedidos se realizarán con un **idCliente** y lista de estambres con cantidades respectivas. |
 | RN4 | Validación de Stock | La compra solo procede si existe el inventario necesario. |
