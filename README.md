@@ -14,8 +14,6 @@ A continuación se encuentran los enlaces a los documentos principales del proye
 
 * **[Responsabilidades del Equipo](https://itam2-my.sharepoint.com/:w:/g/personal/mauricia_pena_itam_mx/Ef9O6lchtohJtBIcgw2eDNcBSGT6g_CMjHWNdV9M11uGvw?e=7tsG1L)**
 
-* **[Plan de Trabajo](https://itam2-my.sharepoint.com/:x:/g/personal/mauricia_pena_itam_mx/EZKX-tA5iQBDp5gFwEEe9qUBdBMM6JRz1Fy_mODThtlhSA?e=6CQH8m)**
-
 ---
 
 ## Entregables del Proyecto
@@ -25,6 +23,8 @@ Esta sección resume todos los entregables esperados y su status: completado/fal
 ### 1. Control del Proyecto
 
 - [ ] Plan de Trabajo en Excel
+
+**[Plan de Trabajo](https://itam2-my.sharepoint.com/:x:/g/personal/mauricia_pena_itam_mx/EZKX-tA5iQBDp5gFwEEe9qUBdBMM6JRz1Fy_mODThtlhSA?e=6CQH8m)**
 
 ### 2. Requerimientos de Negocio
 
