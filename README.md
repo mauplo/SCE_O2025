@@ -97,7 +97,7 @@ Esta sección resume todos los entregables esperados y su status: completado/fal
 - [ ] Pruebas funcionales
 - [ ] Pruebas No Funcionales.
 
-## 13. **Documento de Estress a cada servicio**
+### 13. **Documento de Estress a cada servicio**
 
 - [ ] Script, Proceso y Pojos de estress;
 - [ ] Tabla con resultados de las Pruebas de Estress para las versiones estables.
