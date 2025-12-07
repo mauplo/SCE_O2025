@@ -1,3 +1,7 @@
+<p align="left">
+  <img src="docs/portada.png" width="600">
+</p>
+
 # SCE_O2025
 
 Guía del Proyecto
