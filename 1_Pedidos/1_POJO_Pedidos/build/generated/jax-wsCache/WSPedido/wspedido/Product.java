@@ -21,9 +21,15 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *       &lt;sequence>
  *         &lt;element name="categoryId" type="{http://wspedido/}category" minOccurs="0"/>
  *         &lt;element name="description" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="descuento" type="{http://www.w3.org/2001/XMLSchema}decimal" minOccurs="0"/>
+ *         &lt;element name="esTemporada" type="{http://www.w3.org/2001/XMLSchema}short" minOccurs="0"/>
  *         &lt;element name="existencia" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="fibra" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="grosor" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="lastUpdate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
+ *         &lt;element name="lote" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="marca" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="price" type="{http://www.w3.org/2001/XMLSchema}decimal" minOccurs="0"/>
  *       &lt;/sequence>
@@ -38,9 +44,15 @@ import javax.xml.datatype.XMLGregorianCalendar;
 @XmlType(name = "product", propOrder = {
     "categoryId",
     "description",
+    "descuento",
+    "esTemporada",
     "existencia",
+    "fibra",
+    "grosor",
     "id",
     "lastUpdate",
+    "lote",
+    "marca",
     "name",
     "price"
 })
@@ -48,10 +60,16 @@ public class Product {
 
     protected Category categoryId;
     protected String description;
+    protected BigDecimal descuento;
+    protected Short esTemporada;
     protected int existencia;
+    protected String fibra;
+    protected String grosor;
     protected Integer id;
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar lastUpdate;
+    protected String lote;
+    protected String marca;
     protected String name;
     protected BigDecimal price;
 
@@ -104,6 +122,54 @@ public class Product {
     }
 
     /**
+     * Gets the value of the descuento property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link BigDecimal }
+     *     
+     */
+    public BigDecimal getDescuento() {
+        return descuento;
+    }
+
+    /**
+     * Sets the value of the descuento property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link BigDecimal }
+     *     
+     */
+    public void setDescuento(BigDecimal value) {
+        this.descuento = value;
+    }
+
+    /**
+     * Gets the value of the esTemporada property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Short }
+     *     
+     */
+    public Short getEsTemporada() {
+        return esTemporada;
+    }
+
+    /**
+     * Sets the value of the esTemporada property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Short }
+     *     
+     */
+    public void setEsTemporada(Short value) {
+        this.esTemporada = value;
+    }
+
+    /**
      * Gets the value of the existencia property.
      * 
      */
@@ -117,6 +183,54 @@ public class Product {
      */
     public void setExistencia(int value) {
         this.existencia = value;
+    }
+
+    /**
+     * Gets the value of the fibra property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getFibra() {
+        return fibra;
+    }
+
+    /**
+     * Sets the value of the fibra property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setFibra(String value) {
+        this.fibra = value;
+    }
+
+    /**
+     * Gets the value of the grosor property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getGrosor() {
+        return grosor;
+    }
+
+    /**
+     * Sets the value of the grosor property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setGrosor(String value) {
+        this.grosor = value;
     }
 
     /**
@@ -165,6 +279,54 @@ public class Product {
      */
     public void setLastUpdate(XMLGregorianCalendar value) {
         this.lastUpdate = value;
+    }
+
+    /**
+     * Gets the value of the lote property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getLote() {
+        return lote;
+    }
+
+    /**
+     * Sets the value of the lote property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setLote(String value) {
+        this.lote = value;
+    }
+
+    /**
+     * Gets the value of the marca property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getMarca() {
+        return marca;
+    }
+
+    /**
+     * Sets the value of the marca property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setMarca(String value) {
+        this.marca = value;
     }
 
     /**

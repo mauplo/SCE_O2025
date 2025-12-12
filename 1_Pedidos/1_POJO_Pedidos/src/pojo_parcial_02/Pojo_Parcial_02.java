@@ -1,156 +1,146 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Pojo_Parcial_02.java
+ * Cliente de prueba automatizado para validar:
+ * 1. Descuentos de temporada.
+ * 2. Restricción de Lotes.
+ * 3. Sugerencia de sustitutos.
  */
 package pojo_parcial_02;
 
-/**
- *
- * @author rafael
- * Modificado para prueba 2.1: 3 OK, 3 Error Clte, 1 Error Stock
- */
-public class Pojo_Parcial_02 implements interfazdesacoplada.InterfazDesacoplada {
+import java.util.ArrayList;
+import java.util.List;
+import wspedido.ClsItem;
 
-    long quienSoy;
-    String host = null;
+public class Pojo_Parcial_02 {
 
-    java.util.List<wspedido.Customer> listaCltes = new java.util.ArrayList<>();
-    java.util.List<wspedido.Product> listaProds = new java.util.ArrayList<>();
+    // IDs basados en 1_Proj_bd_almacen.sql
+    private static final int ID_PROD_TEMPORADA = 1; // "Merino Suave" (Precio 150, Desc 0.10) 
+    private static final int ID_PROD_POCO_STOCK = 5; // "Super Saver" (Stock 10) 
+    private static final int ID_CLIENTE = 1; // "Harry Gomar" 
 
-    int num_cltes;
-    int num_prods;
-
-    @Override
-    public void prepara(long quienSoy) {
-        this.quienSoy = quienSoy;
-        this.host = host;
-
-        listaCltes = catalogoCltes();
-        listaProds = catalogoProds();
-        num_cltes = listaCltes.size();
-        num_prods = listaProds.size();
-    }
-
-    @Override
-    public long solicitaServicio(int vez) {
-        java.util.List<wspedido.ClsItem> listaIt = new java.util.ArrayList<>();
-        long t0, t1, deltaT;
-        int num_pedido;
-        int id_clte;
-        
-        // Variables para la lógica de prueba
-        int id_prod, cantidad;
-        wspedido.ClsItem item;
-        
-        // --- LOGICA DE PRUEBA ESPECIFICA 2.1 ---
-        
-        if (vez <= 3) {
-            // [CASO 1-3]: Pedidos OK
-            // Tomamos un cliente válido de la lista
-            int queClte = (vez - 1) % num_cltes; 
-            id_clte = listaCltes.get(queClte).getId();
-            cantidad = 10;
-            System.out.println(">>> CASO OK (Vez " + vez + "): Cliente Válido, Cantidad Válida");
-            
-        } else if (vez <= 6) {
-            // [CASO 4-6]: Pedidos rechazados por Cliente Inexistente
-            // Forzamos un ID que no existe en la BD (ej. 99999)
-            id_clte = 99999; 
-            cantidad = 10;
-            System.out.println(">>> CASO FALLO CLIENTE (Vez " + vez + "): Se envía ID Cliente " + id_clte + " (No existe)");
-            
-        } else {
-            // [CASO 7]: Pedido rechazado por Inventario Insuficiente
-            // Cliente válido, pero cantidad excesiva (2000 > 1000 stock)
-            id_clte = listaCltes.get(0).getId();
-            cantidad = 1100; 
-            System.out.println(">>> CASO FALLO STOCK (Vez " + vez + "): Cantidad " + cantidad + " excede inventario");
-        }
-
-        // Siempre usamos el primer producto (id 1) para controlar el stock
-        // Asumiendo que el producto 0 en la lista es el que reseteamos en SQL
-        id_prod = listaProds.get(0).getId(); 
-
-        item = new wspedido.ClsItem();
-        item.setIdProd(id_prod);
-        item.setCantidad(cantidad);
-        listaIt.add(item);
-
-        System.out.println("-----------------------------------------------");
-        System.out.println("Estresador:" + this.quienSoy + ", vez:" + vez + ", Clte:" + id_clte);
-        System.out.println("Solicitando Producto ID: " + id_prod + " con Cantidad: " + cantidad);
-        System.out.println("-----------------------------------------------");
-
-        //
-        //   Se solicita registrar el pedido en el WS
-        //
-        t0 = System.currentTimeMillis();
-        
-        // La llamada al WS puede devolver -1 o 0 si falla, o lanzar excepción dependiendo de la implementación
-        try {
-            num_pedido = altaPedido(id_clte, listaIt);
-        } catch (Exception e) {
-            System.out.println("Excepción al llamar al WS: " + e.getMessage());
-            num_pedido = -1;
-        }
-        
-        t1 = System.currentTimeMillis();
-        deltaT = t1 - t0;
-
-        System.out.println("El número de pedido devuelto es: " + num_pedido);
-        
-        if(num_pedido <= 0) {
-             System.out.println("RESULTADO: PEDIDO RECHAZADO / NO PROCESADO (Correcto para casos 4-7)");
-        } else {
-             System.out.println("RESULTADO: PEDIDO EXITOSO ID: " + num_pedido);
-        }
-        System.out.println("===============================================");
-
-        return deltaT;
-    }
-
-    @Override
-    public void cierra() {
-        System.out.println("El thread de stress " + this.quienSoy + " ha terminado su trabajo");
-    }
-
-    // =========================================================================
-    //                    main para probar el pojo  
-    // =========================================================================
     public static void main(String[] args) {
-        Pojo_Parcial_02 objServ = new Pojo_Parcial_02();
+        Pojo_Parcial_02 test = new Pojo_Parcial_02();
+        test.ejecutarEscenarios();
+    }
 
-        objServ.prepara(25);
+    public void ejecutarEscenarios() {
+        System.out.println("==================================================");
+        System.out.println("   INICIANDO PRUEBAS DE INTEGRACIÓN (WS + BPEL)");
+        System.out.println("==================================================\n");
+
+        // ---------------------------------------------------------------------
+        // CASO 1: PRUEBA DE DESCUENTO
+        // Producto 1 cuesta 150.00 con 10% descuento. Precio esperado: 135.00
+        // ---------------------------------------------------------------------
+        System.out.println(">>> CASO 1: Validación de Descuento de Temporada");
+        int cantDesc = 2;
+        System.out.println("    Producto ID: " + ID_PROD_TEMPORADA + ", Cantidad: " + cantDesc);
+        System.out.println("    Precio Unitario Base: $150.00, Descuento: 10%");
+        System.out.println("    Esperado Total: (150 * 0.90) * 2 = $270.00");
         
-        // Ejecutar exactamente 7 veces
-        int n_veces = 7; 
+        int pedidoDesc = realizarPedido(ID_CLIENTE, ID_PROD_TEMPORADA, cantDesc, false);
         
-        for (int vez = 1; vez <= n_veces; vez++) {
-            objServ.solicitaServicio(vez);
-            try { Thread.sleep(500); } catch (Exception e) {} 
+        if (pedidoDesc > 0) {
+            double montoReal = obtenerMonto(pedidoDesc);
+            System.out.println("    [EXITO] Pedido creado ID: " + pedidoDesc);
+            System.out.println("    Monto registrado en BD: $" + montoReal);
+            if (Math.abs(montoReal - 270.00) < 0.01) {
+                System.out.println("    [VERIFICACIÓN] EL CÁLCULO DE DESCUENTO ES CORRECTO.");
+            } else {
+                System.out.println("    [ERROR] El monto no coincide con el descuento esperado.");
+            }
+        } else {
+            System.out.println("    [FALLO] No se pudo crear el pedido de prueba 1.");
         }
-        objServ.cierra();
+        System.out.println("--------------------------------------------------\n");
 
+        // ---------------------------------------------------------------------
+        // CASO 2: PRUEBA DE RESTRICCIÓN DE LOTE
+        // Intentamos comprar más de lo que existe en el lote específico.
+        // ID 1 tiene 500 (menos los 2 de arriba = 498). Pedimos 1000.
+        // Restricción = TRUE. Debe retornar 0.
+        // ---------------------------------------------------------------------
+        System.out.println(">>> CASO 2: Restricción de Lote / Calidad (Debe Fallar)");
+        int cantLote = 1000; 
+        System.out.println("    Solicitando: " + cantLote + " unidades del ID " + ID_PROD_TEMPORADA);
+        System.out.println("    Restricción de Calidad: ACTIVADA (TRUE)");
+        
+        int pedidoLote = realizarPedido(ID_CLIENTE, ID_PROD_TEMPORADA, cantLote, true);
+        
+        if (pedidoLote == 0) {
+            System.out.println("    [EXITO] El sistema rechazó el pedido correctamente (Return 0).");
+            System.out.println("    Razón: No existe un lote único con " + cantLote + " unidades.");
+        } else {
+            System.out.println("    [FALLO] El sistema permitió el pedido ID: " + pedidoLote + " indebidamente.");
+        }
+        System.out.println("--------------------------------------------------\n");
+
+        // ---------------------------------------------------------------------
+        // CASO 3: STOCK INSUFICIENTE Y SUGERENCIA
+        // ID 5 tiene 10 de stock. Pedimos 20.
+        // El sistema debe fallar el pedido y nosotros invocamos sugerencias.
+        // ---------------------------------------------------------------------
+        System.out.println(">>> CASO 3: Falta de Stock y Sugerencia de Sustitutos");
+        int cantSinStock = 20;
+        System.out.println("    Producto ID: " + ID_PROD_POCO_STOCK + " (Super Saver), Stock actual ~10");
+        System.out.println("    Solicitando: " + cantSinStock);
+        
+        int pedidoStock = realizarPedido(ID_CLIENTE, ID_PROD_POCO_STOCK, cantSinStock, false);
+        
+        if (pedidoStock == 0) {
+            System.out.println("    [SISTEMA] Pedido rechazado por falta de stock.");
+            System.out.println("    --> Invocando servicio 'sugerirSustitutos'...");
+            
+            // Llamada directa al método de sugerencia (Simulando lo que haría el BPEL en el Fault)
+            solicitarSugerencia(ID_PROD_POCO_STOCK, cantSinStock);
+        } else {
+            System.out.println("    [FALLO] Se creó el pedido ID: " + pedidoStock + " inesperadamente.");
+        }
+        System.out.println("==================================================");
     }
-    // =========================================================================
-    //                    Utilerías del WS 
-    // =========================================================================
-    private static int altaPedido(int idClte, java.util.List<wspedido.ClsItem> listaIt) {
+
+    // --- MÉTODOS AUXILIARES ---
+
+    private int realizarPedido(int idClte, int idProd, int cantidad, boolean restriccion) {
+        List<ClsItem> items = new ArrayList<>();
+        ClsItem it = new ClsItem();
+        it.setIdProd(idProd);
+        it.setCantidad(cantidad);
+        items.add(it);
+
+        try {
+            return altaPedido(idClte, items, restriccion);
+        } catch (Exception e) {
+            System.out.println("    [EXCEPCION] " + e.getMessage());
+            return 0;
+        }
+    }
+
+    private void solicitarSugerencia(int idProd, int cantidad) {
+        try {
+            wspedido.WSPedido_Service service = new wspedido.WSPedido_Service();
+            wspedido.WSPedido port = service.getWSPedidoPort();
+            String respuesta = port.sugerirSustitutos(idProd, cantidad);
+            
+            System.out.println("\n    +++ RESPUESTA DEL WS (SUSTITUTOS) +++");
+            System.out.println(respuesta);
+            System.out.println("    +++++++++++++++++++++++++++++++++++++");
+        } catch (Exception e) {
+            System.out.println("    Error obteniendo sugerencias: " + e.getMessage());
+        }
+    }
+    
+    // --- WRAPPERS SOAP ---
+    
+    private static int altaPedido(int idClte, List<ClsItem> listaIt, boolean restriccionCalidad) {
         wspedido.WSPedido_Service service = new wspedido.WSPedido_Service();
         wspedido.WSPedido port = service.getWSPedidoPort();
-        return port.altaPedido(idClte, listaIt);
+        return port.altaPedido(idClte, listaIt, restriccionCalidad);
     }
 
-    private static java.util.List<wspedido.Customer> catalogoCltes() {
+    private static double obtenerMonto(int idPedido) {
         wspedido.WSPedido_Service service = new wspedido.WSPedido_Service();
         wspedido.WSPedido port = service.getWSPedidoPort();
-        return port.catalogoCltes();
-    }
-
-    private static java.util.List<wspedido.Product> catalogoProds() {
-        wspedido.WSPedido_Service service = new wspedido.WSPedido_Service();
-        wspedido.WSPedido port = service.getWSPedidoPort();
-        return port.catalogoProds();
+        return port.montoCO(idPedido);
     }
 }

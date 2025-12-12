@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://schemas.xmlsoap.org/soap/envelope/ http://schemas.xmlsoap.org/soap/envelope/">
+  <S:Body>
+    <ns2:catalogoProdsResponse xmlns:ns2="http://wspedido/">
+      <return>
+        <categoryId>
+          <id>1</id>
+          <name>Lana</name>
+        </categoryId>
+        <description>Lana merino fina para bebes</description>
+        <descuento>0.10</descuento>
+        <esTemporada>1</esTemporada>
+        <existencia>498</existencia>
+        <fibra>100% Merino</fibra>
+        <grosor>Ligero (3)</grosor>
+        <id>1</id>
+        <lastUpdate>2025-01-01T09:00:00-06:00</lastUpdate>
+        <lote>LOTE-A1</lote>
+        <marca>Lion Brand</marca>
+        <name>Merino Suave</name>
+        <price>150.00</price>
+      </return>
+      <return>
+        <categoryId>
+          <id>1</id>
+          <name>Lana</name>
+        </categoryId>
+        <description>Lana virgen de tierras altas</description>
+        <descuento>0.00</descuento>
+        <esTemporada>0</esTemporada>
+        <existencia>300</existencia>
+        <fibra>100% Lana</fibra>
+        <grosor>Medio (4)</grosor>
+        <id>2</id>
+        <lastUpdate>2025-01-01T09:00:00-06:00</lastUpdate>
+        <lote>LOTE-B2</lote>
+        <marca>Patons</marca>
+        <name>Lana Highland</name>
+        <price>200.50</price>
+      </return>
+      <return>
+        <categoryId>
+          <id>2</id>
+          <name>Algodon</name>
+        </categoryId>
+        <description>Algodon peruano brillante</description>
+        <descuento>0.15</descuento>
+        <esTemporada>1</esTemporada>
+        <existencia>600</existencia>
+        <fibra>100% Algodon</fibra>
+        <grosor>Fino (2)</grosor>
+        <id>3</id>
+        <lastUpdate>2025-01-01T09:00:00-06:00</lastUpdate>
+        <lote>LOTE-C3</lote>
+        <marca>Bernat</marca>
+        <name>Algodon Pima</name>
+        <price>120.00</price>
+      </return>
+      <return>
+        <categoryId>
+          <id>2</id>
+          <name>Algodon</name>
+        </categoryId>
+        <description>Ideal para amigurumis</description>
+        <descuento>0.00</descuento>
+        <esTemporada>0</esTemporada>
+        <existencia>800</existencia>
+        <fibra>100% Algodon</fibra>
+        <grosor>Super Fino (1)</grosor>
+        <id>4</id>
+        <lastUpdate>2025-01-01T09:00:00-06:00</lastUpdate>
+        <lote>LOTE-C3</lote>
+        <marca>Sinfonia</marca>
+        <name>Hilaza Rustica</name>
+        <price>85.00</price>
+      </return>
+      <return>
+        <categoryId>
+          <id>3</id>
+          <name>Acrilico</name>
+        </categoryId>
+        <description>Económico y duradero</description>
+        <descuento>0.00</descuento>
+        <esTemporada>0</esTemporada>
+        <existencia>10</existencia>
+        <fibra>100% Acrilico</fibra>
+        <grosor>Medio (4)</grosor>
+        <id>5</id>
+        <lastUpdate>2025-01-01T09:00:00-06:00</lastUpdate>
+        <lote>LOTE-D4</lote>
+        <marca>Red Heart</marca>
+        <name>Super Saver</name>
+        <price>60.00</price>
+      </return>
+      <return>
+        <categoryId>
+          <id>3</id>
+          <name>Acrilico</name>
+        </categoryId>
+        <description>Antialergico colores pastel</description>
+        <descuento>0.00</descuento>
+        <esTemporada>0</esTemporada>
+        <existencia>900</existencia>
+        <fibra>100% Acrilico</fibra>
+        <grosor>Ligero (3)</grosor>
+        <id>6</id>
+        <lastUpdate>2025-01-01T09:00:00-06:00</lastUpdate>
+        <lote>LOTE-E5</lote>
+        <marca>Cisne</marca>
+        <name>Baby Soft</name>
+        <price>55.00</price>
+      </return>
+      <return>
+        <categoryId>
+          <id>4</id>
+          <name>Mezcla</name>
+        </categoryId>
+        <description>Calidez de lana facil cuidado</description>
+        <descuento>0.05</descuento>
+        <esTemporada>1</esTemporada>
+        <existencia>400</existencia>
+        <fibra>80% Acrilico 20% Lana</fibra>
+        <grosor>Abultado (5)</grosor>
+        <id>7</id>
+        <lastUpdate>2025-01-01T09:00:00-06:00</lastUpdate>
+        <lote>LOTE-F6</lote>
+        <marca>Lion Brand</marca>
+        <name>Wool-Ease</name>
+        <price>110.00</price>
+      </return>
+      <return>
+        <categoryId>
+          <id>4</id>
+          <name>Mezcla</name>
+        </categoryId>
+        <description>Cambios de color degradados</description>
+        <descuento>0.00</descuento>
+        <esTemporada>0</esTemporada>
+        <existencia>350</existencia>
+        <fibra>Acrilico Premium</fibra>
+        <grosor>Medio (4)</grosor>
+        <id>8</id>
+        <lastUpdate>2025-01-01T09:00:00-06:00</lastUpdate>
+        <lote>LOTE-G7</lote>
+        <marca>Lion Brand</marca>
+        <name>Mandala Ombre</name>
+        <price>180.00</price>
+      </return>
+    </ns2:catalogoProdsResponse>
+  </S:Body>
+</S:Envelope>

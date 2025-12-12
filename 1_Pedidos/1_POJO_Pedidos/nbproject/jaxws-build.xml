@@ -18,8 +18,8 @@
     </target>
     <target name="wsimport-client-WSPedido" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/WSPedido"/>
-        <property name="wsdl-WSPedido" location="xml-resources/web-service-references/WSPedido/wsdl/localhost_28346/1_Pedidos/WSPedido.wsdl"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/WSPedido" destdir="${build.generated.dir}/jax-wsCache/WSPedido" wsdl="${wsdl-WSPedido}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:16373/1_Pedidos/WSPedido?WSDL" xnocompile="true" xendorsed="true" package="wspedido">
+        <property name="wsdl-WSPedido" location="xml-resources/web-service-references/WSPedido/wsdl/localhost_16373/1_Pedidos/WSPedido.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/WSPedido" destdir="${build.generated.dir}/jax-wsCache/WSPedido" wsdl="${wsdl-WSPedido}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:16373/1_Pedidos/WSPedido?WSDL" xnocompile="true" xendorsed="true">
             <depends file="${wsdl-WSPedido}"/>
             <produces dir="${build.generated.dir}/jax-wsCache/WSPedido"/>
         </wsimport>

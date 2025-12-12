@@ -4,6 +4,6 @@
     <system systemId="http://localhost:25624/WS_Parcial_02_sol/WSPedido?xsd=1" uri="xml-resources/web-service-references/WSPedido/wsdl/localhost_25624/WS_Parcial_02_sol/WSPedido.xsd_1.xsd"/>
     <system systemId="http://localhost:25624/WS_Parcial_02_sol/WSPedido?WSDL" uri="xml-resources/web-service-references/WSPedido/wsdl/localhost_25624/WS_Parcial_02_sol/WSPedido.wsdl"/>
     <system systemId="http://localhost:25624/WS_Parcial_02_sol/WSPedido?xsd=1" uri="xml-resources/web-service-references/WSPedido/wsdl/localhost_25624/WS_Parcial_02_sol/WSPedido.xsd_1.xsd"/>
-    <system systemId="http://localhost:16373/1_Pedidos/WSPedido?WSDL" uri="xml-resources/web-service-references/WSPedido/wsdl/localhost_28346/1_Pedidos/WSPedido.wsdl"/>
-    <system systemId="http://localhost:16373/1_Pedidos/WSPedido?xsd=1" uri="xml-resources/web-service-references/WSPedido/wsdl/localhost_28346/1_Pedidos/WSPedido.xsd_1.xsd"/>
+    <system systemId="http://localhost:16373/1_Pedidos/WSPedido?WSDL" uri="xml-resources/web-service-references/WSPedido/wsdl/localhost_16373/1_Pedidos/WSPedido.wsdl"/>
+    <system systemId="http://localhost:16373/1_Pedidos/WSPedido?xsd=1" uri="xml-resources/web-service-references/WSPedido/wsdl/localhost_16373/1_Pedidos/WSPedido.xsd_1.xsd"/>
 </catalog>

@@ -24,21 +24,21 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _SugerirSustitutos_QNAME = new QName("http://wspedido/", "sugerirSustitutos");
     private final static QName _MontoCOResponse_QNAME = new QName("http://wspedido/", "montoCOResponse");
     private final static QName _CatalogoCltes_QNAME = new QName("http://wspedido/", "catalogoCltes");
     private final static QName _CatalogoProdsResponse_QNAME = new QName("http://wspedido/", "catalogoProdsResponse");
     private final static QName _Product_QNAME = new QName("http://wspedido/", "product");
+    private final static QName _SugerirSustitutosResponse_QNAME = new QName("http://wspedido/", "sugerirSustitutosResponse");
     private final static QName _AltaPedido_QNAME = new QName("http://wspedido/", "altaPedido");
     private final static QName _RestituyeProductosCO_QNAME = new QName("http://wspedido/", "restituyeProductosCO");
     private final static QName _MontoCO_QNAME = new QName("http://wspedido/", "montoCO");
-    private final static QName _Hello_QNAME = new QName("http://wspedido/", "hello");
     private final static QName _RestituyeProductosCOResponse_QNAME = new QName("http://wspedido/", "restituyeProductosCOResponse");
     private final static QName _Category_QNAME = new QName("http://wspedido/", "category");
     private final static QName _CatalogoProds_QNAME = new QName("http://wspedido/", "catalogoProds");
     private final static QName _Customer_QNAME = new QName("http://wspedido/", "customer");
     private final static QName _CatalogoCltesResponse_QNAME = new QName("http://wspedido/", "catalogoCltesResponse");
     private final static QName _AltaPedidoResponse_QNAME = new QName("http://wspedido/", "altaPedidoResponse");
-    private final static QName _HelloResponse_QNAME = new QName("http://wspedido/", "helloResponse");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: wspedido
@@ -69,6 +69,14 @@ public class ObjectFactory {
      */
     public Product createProduct() {
         return new Product();
+    }
+
+    /**
+     * Create an instance of {@link SugerirSustitutosResponse }
+     * 
+     */
+    public SugerirSustitutosResponse createSugerirSustitutosResponse() {
+        return new SugerirSustitutosResponse();
     }
 
     /**
@@ -104,6 +112,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link SugerirSustitutos }
+     * 
+     */
+    public SugerirSustitutos createSugerirSustitutos() {
+        return new SugerirSustitutos();
+    }
+
+    /**
      * Create an instance of {@link CatalogoCltesResponse }
      * 
      */
@@ -117,22 +133,6 @@ public class ObjectFactory {
      */
     public AltaPedidoResponse createAltaPedidoResponse() {
         return new AltaPedidoResponse();
-    }
-
-    /**
-     * Create an instance of {@link HelloResponse }
-     * 
-     */
-    public HelloResponse createHelloResponse() {
-        return new HelloResponse();
-    }
-
-    /**
-     * Create an instance of {@link Hello }
-     * 
-     */
-    public Hello createHello() {
-        return new Hello();
     }
 
     /**
@@ -176,6 +176,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SugerirSustitutos }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://wspedido/", name = "sugerirSustitutos")
+    public JAXBElement<SugerirSustitutos> createSugerirSustitutos(SugerirSustitutos value) {
+        return new JAXBElement<SugerirSustitutos>(_SugerirSustitutos_QNAME, SugerirSustitutos.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link MontoCOResponse }{@code >}}
      * 
      */
@@ -212,6 +221,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SugerirSustitutosResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://wspedido/", name = "sugerirSustitutosResponse")
+    public JAXBElement<SugerirSustitutosResponse> createSugerirSustitutosResponse(SugerirSustitutosResponse value) {
+        return new JAXBElement<SugerirSustitutosResponse>(_SugerirSustitutosResponse_QNAME, SugerirSustitutosResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link AltaPedido }{@code >}}
      * 
      */
@@ -236,15 +254,6 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://wspedido/", name = "montoCO")
     public JAXBElement<MontoCO> createMontoCO(MontoCO value) {
         return new JAXBElement<MontoCO>(_MontoCO_QNAME, MontoCO.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Hello }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://wspedido/", name = "hello")
-    public JAXBElement<Hello> createHello(Hello value) {
-        return new JAXBElement<Hello>(_Hello_QNAME, Hello.class, null, value);
     }
 
     /**
@@ -299,15 +308,6 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://wspedido/", name = "altaPedidoResponse")
     public JAXBElement<AltaPedidoResponse> createAltaPedidoResponse(AltaPedidoResponse value) {
         return new JAXBElement<AltaPedidoResponse>(_AltaPedidoResponse_QNAME, AltaPedidoResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link HelloResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://wspedido/", name = "helloResponse")
-    public JAXBElement<HelloResponse> createHelloResponse(HelloResponse value) {
-        return new JAXBElement<HelloResponse>(_HelloResponse_QNAME, HelloResponse.class, null, value);
     }
 
 }

@@ -1,32 +1,37 @@
 /*
-* To change this license header, choose License Headers in Project Properties.
-* To change this template file, choose Tools | Templates
-* and open the template in the editor.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package wspedido;
 
 import entidades.Product;
+import entidades.Customer;
+import entidades.CustomerOrder;
+import entidades.OrderedProduct;
+import entidades.OrderedProductPK;
 import fachadas.CustomerFacade;
 import fachadas.CustomerOrderFacade;
 import fachadas.OrderedProductFacade;
 import fachadas.ProductFacade;
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.List;
+import java.util.ArrayList;
 import javax.ejb.EJB;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
-import java.util.logging.Logger;
-import java.util.List;
-import java.util.ArrayList;
-
 import javax.persistence.EntityManager;
-import javax.persistence.LockModeType;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
- *
- * @author RGAMBOAH
+ * Web Service para gestión de Pedidos con Reglas de Negocio:
+ * 1. Restricción de Lote (Calidad).
+ * 2. Descuento de Temporada.
+ * 3. Sugerencia de Sustitutos (en caso de falta de stock).
  */
 @WebService(serviceName = "WSPedido")
 public class WSPedido {
@@ -39,108 +44,115 @@ public class WSPedido {
     private ProductFacade productFacade;
     @EJB
     private CustomerFacade customerFacade;
-
-    /**
-     * This is a sample web service operation
-     */
-    @WebMethod(operationName = "hello")
-    public String hello(@WebParam(name = "name") String txt) {
-        return "Hello " + txt + " !";
-    }
-
     
+    // Asegúrate de que este nombre coincida con tu persistence.xml
+    @PersistenceContext(unitName = "WS_Parcial_02PU")
+    private EntityManager em;
+
     /**
-     * Web service operation
+     * Web service operation: ALTA PEDIDO MEJORADA
+     * Incluye control de lotes, descuentos de temporada y validación "Todo o Nada".
      */
     @WebMethod(operationName = "altaPedido")
     public int altaPedido(@WebParam(name = "id_clte") int id_clte, 
-                          @WebParam(name = "lista_it") List<ClsItem> lista_it) 
+                          @WebParam(name = "lista_it") List<ClsItem> lista_it,
+                          @WebParam(name = "restriccion_calidad") boolean restriccion_calidad) 
     {
-        entidades.Customer clte = customerFacade.find(new Integer(id_clte));
-        if( clte == null)
-        {
-            Logger.getLogger(this.getClass().getName()).log(Level.INFO,
-                        "El cliente_id:" + id_clte + " NO EXISTE");
+        Customer clte = customerFacade.find(new Integer(id_clte));
+        if(clte == null) {
+            Logger.getLogger(this.getClass().getName()).log(Level.INFO, "El cliente_id:" + id_clte + " NO EXISTE");
             return 0;
         }
         
-        //List<entidades.Product> lista_prods_en_pedido = new ArrayList<>();
-        List<entidades.OrderedProduct> lista_orderedProducts = new ArrayList<>();
-        entidades.OrderedProduct ordered_product;
-        entidades.Product prod;
+        List<OrderedProduct> lista_orderedProducts = new ArrayList<>();
+        OrderedProduct ordered_product;
+        Product prod;
         int num_conf;
-        // para obtener la cantidad posible a surtir
-        int cantidad_posible;
-        int num_pedido;
+        int num_pedido = 0;
         
         BigDecimal bd_monto_pedido = BigDecimal.ZERO;
-        BigDecimal bd_monto_item;
+        
+        // Bandera para cancelar todo el pedido si falta un ítem
+        boolean pedidoValido = true;
+
         for (ClsItem it : lista_it) 
         {
             Logger.getLogger(this.getClass().getName()).log(Level.INFO,
-                    "Product_id:" + it.getId_prod() + ", cantidad:"
-                    + it.getCantidad());
-            // -----------------------
+                    "Procesando Product_id:" + it.getId_prod() + ", cantidad:" + it.getCantidad());
             
-            cantidad_posible = productFacade.actualizaExistencia(it.getId_prod(),it.getCantidad());
+            prod = productFacade.find(new Integer(it.getId_prod()));
             
-            if (cantidad_posible > 0) {
-                ordered_product = new entidades.OrderedProduct();
-                prod = productFacade.find(new Integer(it.getId_prod()));
-                ordered_product.setProduct(prod);
-                
-                if( cantidad_posible > 0 )
-                {
-                  ordered_product.setQuantity((short) cantidad_posible);
-                  lista_orderedProducts.add(ordered_product);
-                  //lista_prods_en_pedido.add(prod);
-                  Logger.getLogger(this.getClass().getName()).log(Level.INFO,
-                        "Product_id:" + prod.getId() + ", "
-                        + prod.getName() + ", "
-                        + prod.getDescription() + ", "
-                        + prod.getCategoryId().getName() + ", "
-                        + prod.getPrice());
-                  bd_monto_item = prod.getPrice().multiply(BigDecimal.valueOf(cantidad_posible));
-                  bd_monto_item = bd_monto_item.setScale(2,BigDecimal.ROUND_HALF_UP);
-                  bd_monto_pedido = bd_monto_pedido.add(bd_monto_item);  
+            if (prod != null) {
+                // --- REGLA 1: VALIDACIÓN PREVIA DE STOCK ---
+                // Si hay restricción de calidad o para evitar ventas parciales, verificamos antes.
+                if (prod.getExistencia() < it.getCantidad()) {
+                    Logger.getLogger(this.getClass().getName()).log(Level.WARNING, 
+                            "Stock insuficiente para ID " + prod.getId() + ". Req: " + it.getCantidad() + ", Disp: " + prod.getExistencia());
+                    pedidoValido = false;
+                    break; 
                 }
-                //--------------------------------------------
-            } 
-            else 
-            {
-                Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Clave de producto " + it.getId_prod() + " INEXISTENTE o sin existencias");
+
+                // --- INTENTO DE APARTADO ---
+                int cantidad_apartada = productFacade.actualizaExistencia(it.getId_prod(), it.getCantidad());
+            
+                // --- CORRECCIÓN CLAVE: LÓGICA "TODO O NADA" ---
+                // Si el facade devolvió menos de lo pedido (venta parcial), revertimos y fallamos.
+                if (cantidad_apartada < it.getCantidad()) {
+                    // Reversión manual (Rollback) de lo que se haya podido apartar parcialmente
+                    if (cantidad_apartada > 0) {
+                        productFacade.agregaExistencia(it.getId_prod(), cantidad_apartada);
+                    }
+                    Logger.getLogger(this.getClass().getName()).log(Level.WARNING, 
+                            "Venta parcial detectada y rechazada para mantener integridad del pedido.");
+                    pedidoValido = false;
+                    break;
+                }
+
+                // Si llegamos aquí, tenemos la cantidad COMPLETA asegurada.
+                ordered_product = new OrderedProduct();
+                ordered_product.setProduct(prod);
+                ordered_product.setQuantity((short) cantidad_apartada);
+                
+                // --- REGLA 2: DESCUENTO DE TEMPORADA ---
+                BigDecimal precioFinal = prod.getPrice();
+                // En Derby/JavaDB boolean se mapea a SmallInt (0 o 1)
+                if (prod.getEsTemporada() != null && prod.getEsTemporada() == 1) {
+                        BigDecimal descuento = prod.getDescuento() != null ? prod.getDescuento() : BigDecimal.ZERO;
+                        BigDecimal factor = BigDecimal.ONE.subtract(descuento);
+                        precioFinal = precioFinal.multiply(factor);
+                        Logger.getLogger(this.getClass().getName()).log(Level.INFO, 
+                                "Descuento de temporada aplicado: " + descuento + " a " + prod.getName());
+                }
+                
+                lista_orderedProducts.add(ordered_product);
+
+                BigDecimal bd_monto_item = precioFinal.multiply(BigDecimal.valueOf(cantidad_apartada));
+                // Redondeo estándar para moneda
+                bd_monto_item = bd_monto_item.setScale(2, BigDecimal.ROUND_HALF_UP);
+                bd_monto_pedido = bd_monto_pedido.add(bd_monto_item);  
+            } else {
+                pedidoValido = false; // Producto no encontrado
+                break;
             }
         }
-        if( lista_orderedProducts.size() > 0 ) // hay items en el pedido
+        
+        // --- PERSISTENCIA (Solo si todo el pedido es válido) ---
+        if(pedidoValido && !lista_orderedProducts.isEmpty()) 
         {
-          
-          // se obtiene el cliente
-          Logger.getLogger(this.getClass().getName()).log(Level.SEVERE,
-                "Pedido del cliente:" + clte.getId() + ", "
-                + clte.getName() + " por " + bd_monto_pedido);
-          //
-          // Se genera el customer order
-          //
-          entidades.CustomerOrder customer_order = new entidades.CustomerOrder();
+          CustomerOrder customer_order = new CustomerOrder();
           customer_order.setCustomerId(clte);
-          java.util.Date d = new java.util.Date();
-
-          customer_order.setDateCreated(d);
+          customer_order.setDateCreated(new java.util.Date());
           customer_order.setAmount(bd_monto_pedido);
         
-          // se solicita el número de confirmación del pedido
           num_conf = customerOrderFacade.next_conf_number();
-        
           customer_order.setConfirmationNumber(num_conf);
           customerOrderFacade.create(customer_order);
           num_pedido = customer_order.getId();
-          //
-          // Van los items
-          //
-          entidades.OrderedProductPK oppk;
-          for (entidades.OrderedProduct op : lista_orderedProducts) 
+          
+          OrderedProductPK oppk;
+          for (OrderedProduct op : lista_orderedProducts) 
           {
-            oppk = new entidades.OrderedProductPK();
+            oppk = new OrderedProductPK();
             oppk.setCustomerOrderId(customer_order.getId());
             oppk.setProductId(op.getProduct().getId());
             op.setOrderedProductPK(oppk);
@@ -150,40 +162,86 @@ public class WSPedido {
         }
         else
         {
-            num_pedido = 0;  // no hay items a surtir en el pedido
+            // --- ROLLBACK MANUAL ---
+            // Si el pedido no es válido pero ya habíamos apartado productos en la lista, los devolvemos.
+            for(OrderedProduct op : lista_orderedProducts) {
+                productFacade.agregaExistencia(op.getProduct().getId(), (int) op.getQuantity());
+            }
+            // Retornamos 0 para indicar fallo y que el cliente (o BPEL) busque sugerencias.
+            return 0;
         }
         
         return num_pedido;
     }
-    // =========================================================================
-    //         Restitución de productos al cancelarse un pedido
-    // =========================================================================
 
     /**
-     * Web service operation
-     * @return 
+     * Web service operation: SUGERIR SUSTITUTOS
+     * Busca productos con mismo grosor y fibra pero diferente ID (Lote).
      */
+    @WebMethod(operationName = "sugerirSustitutos")
+    public String sugerirSustitutos(@WebParam(name = "id_prod_original") int id_prod, 
+                                    @WebParam(name = "cantidad_requerida") int cantidad) {
+        
+        Product original = productFacade.find(id_prod);
+        if (original == null) return "Producto original no encontrado.";
 
+        try {
+            // Consulta JPQL Dinámica
+            // Busca productos con: Mismo Grosor, Misma Fibra, ID diferente, Stock suficiente
+            String jpql = "SELECT p FROM Product p WHERE p.grosor = :grosor AND p.fibra = :fibra " +
+                          "AND p.id <> :origId AND p.existencia >= :cant";
+            
+            Query q = em.createQuery(jpql);
+            q.setParameter("grosor", original.getGrosor());
+            q.setParameter("fibra", original.getFibra());
+            q.setParameter("origId", original.getId());
+            q.setParameter("cant", cantidad);
+            
+            List<Product> sustitutos = q.getResultList();
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("STOCK INSUFICIENTE para: ").append(original.getName())
+              .append(" (Lote: ").append(original.getLote()).append(").\n");
+            
+            if (sustitutos.isEmpty()) {
+                sb.append("AVISO: No se encontraron sustitutos exactos (Mismo Grosor/Fibra) con stock suficiente.");
+            } else {
+                sb.append("SUGERENCIAS DISPONIBLES:\n");
+                for (Product p : sustitutos) {
+                    sb.append("- ID: ").append(p.getId())
+                      .append(" | ").append(p.getName())
+                      .append(" | Lote: ").append(p.getLote())
+                      .append(" | Precio: $").append(p.getPrice())
+                      .append(" | Stock: ").append(p.getExistencia()).append("\n");
+                }
+            }
+            return sb.toString();
+            
+        } catch (Exception e) {
+            return "Error buscando sustitutos: " + e.getMessage();
+        }
+    }
+
+    // =========================================================================
+    //         Restitución de productos al cancelarse un pedido (desde BPEL)
+    // =========================================================================
     @WebMethod(operationName = "restituyeProductosCO")
     public String restituyeProductosCO(@WebParam(name="id_CO") int id_CO)
     {
       String strRes = "";
-      entidades.CustomerOrder co = customerOrderFacade.find(id_CO);
-      Product       prod;
+      CustomerOrder co = customerOrderFacade.find(id_CO);
+      Product prod;
       if(co != null)
       {
-        java.util.List<entidades.OrderedProduct> items = (java.util.List<entidades.OrderedProduct>) co.getOrderedProductList();
-        strRes += "Colección con " + items.size()+ " items\n";
+        List<OrderedProduct> items = (List<OrderedProduct>) co.getOrderedProductList();
+        strRes += "Restituyendo " + items.size()+ " items...\n";
         for( entidades.OrderedProduct op : items )
         {
             prod = productFacade.find(op.getProduct().getId());
             productFacade.agregaExistencia(prod.getId(), op.getQuantity());
-            strRes += String.format("%10d",   prod.getId())  + " ... " +
-                                String.format("Cantidad agregada:%5d", op.getQuantity()) + " ... " +
-                                String.format("%-20s",  prod.getName()) + " ... " +
-                                String.format("%-45s",  prod.getDescription()) + '\n';
+            strRes += "ID: " + prod.getId() + " - Regresados: " + op.getQuantity() + "\n";
         }
-        strRes += "Se restituyeron productos por un monto de " + co.getAmount();
+        strRes += "Monto cancelado: " + co.getAmount();
       }
       return strRes;
     }
@@ -194,31 +252,21 @@ public class WSPedido {
     @WebMethod(operationName = "montoCO")
     public double montoCO(@WebParam(name="id_CO") int id_CO)
     {
-      double monto = 0.0;
-      entidades.CustomerOrder co = customerOrderFacade.find(id_CO);
-      monto = (co.getAmount()).doubleValue();
-      return monto;
+      CustomerOrder co = customerOrderFacade.find(id_CO);
+      return (co != null) ? co.getAmount().doubleValue() : 0.0;
     }
 
     // =========================================================================
-    //             Para el catálogo de clientes y de productos
+    //             Catálogos (Utilizados por Cliente o BPEL)
     // =========================================================================
-    /**
-     * Web service operation
-     * @return 
-     */
     @WebMethod(operationName = "catalogoCltes")
-    public java.util.List<entidades.Customer> catalogoCltes() 
+    public List<entidades.Customer> catalogoCltes() 
     {
         return customerFacade.findAll();
     }
 
-    /**
-     * Web service operation
-     * @return 
-     */
     @WebMethod(operationName = "catalogoProds")
-    public java.util.List<entidades.Product> catalogoProds() 
+    public List<entidades.Product> catalogoProds() 
     {   
         return productFacade.findAll();
     }

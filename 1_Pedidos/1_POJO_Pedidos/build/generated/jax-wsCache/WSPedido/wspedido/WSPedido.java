@@ -27,30 +27,6 @@ public interface WSPedido {
 
     /**
      * 
-     * @return
-     *     returns java.util.List<wspedido.Product>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "catalogoProds", targetNamespace = "http://wspedido/", className = "wspedido.CatalogoProds")
-    @ResponseWrapper(localName = "catalogoProdsResponse", targetNamespace = "http://wspedido/", className = "wspedido.CatalogoProdsResponse")
-    @Action(input = "http://wspedido/WSPedido/catalogoProdsRequest", output = "http://wspedido/WSPedido/catalogoProdsResponse")
-    public List<Product> catalogoProds();
-
-    /**
-     * 
-     * @return
-     *     returns java.util.List<wspedido.Customer>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "catalogoCltes", targetNamespace = "http://wspedido/", className = "wspedido.CatalogoCltes")
-    @ResponseWrapper(localName = "catalogoCltesResponse", targetNamespace = "http://wspedido/", className = "wspedido.CatalogoCltesResponse")
-    @Action(input = "http://wspedido/WSPedido/catalogoCltesRequest", output = "http://wspedido/WSPedido/catalogoCltesResponse")
-    public List<Customer> catalogoCltes();
-
-    /**
-     * 
      * @param idCO
      * @return
      *     returns java.lang.String
@@ -63,6 +39,27 @@ public interface WSPedido {
     public String restituyeProductosCO(
         @WebParam(name = "id_CO", targetNamespace = "")
         int idCO);
+
+    /**
+     * 
+     * @param restriccionCalidad
+     * @param listaIt
+     * @param idClte
+     * @return
+     *     returns int
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "altaPedido", targetNamespace = "http://wspedido/", className = "wspedido.AltaPedido")
+    @ResponseWrapper(localName = "altaPedidoResponse", targetNamespace = "http://wspedido/", className = "wspedido.AltaPedidoResponse")
+    @Action(input = "http://wspedido/WSPedido/altaPedidoRequest", output = "http://wspedido/WSPedido/altaPedidoResponse")
+    public int altaPedido(
+        @WebParam(name = "id_clte", targetNamespace = "")
+        int idClte,
+        @WebParam(name = "lista_it", targetNamespace = "")
+        List<ClsItem> listaIt,
+        @WebParam(name = "restriccion_calidad", targetNamespace = "")
+        boolean restriccionCalidad);
 
     /**
      * 
@@ -81,35 +78,44 @@ public interface WSPedido {
 
     /**
      * 
-     * @param name
+     * @return
+     *     returns java.util.List<wspedido.Customer>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "catalogoCltes", targetNamespace = "http://wspedido/", className = "wspedido.CatalogoCltes")
+    @ResponseWrapper(localName = "catalogoCltesResponse", targetNamespace = "http://wspedido/", className = "wspedido.CatalogoCltesResponse")
+    @Action(input = "http://wspedido/WSPedido/catalogoCltesRequest", output = "http://wspedido/WSPedido/catalogoCltesResponse")
+    public List<Customer> catalogoCltes();
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<wspedido.Product>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "catalogoProds", targetNamespace = "http://wspedido/", className = "wspedido.CatalogoProds")
+    @ResponseWrapper(localName = "catalogoProdsResponse", targetNamespace = "http://wspedido/", className = "wspedido.CatalogoProdsResponse")
+    @Action(input = "http://wspedido/WSPedido/catalogoProdsRequest", output = "http://wspedido/WSPedido/catalogoProdsResponse")
+    public List<Product> catalogoProds();
+
+    /**
+     * 
+     * @param idProdOriginal
+     * @param cantidadRequerida
      * @return
      *     returns java.lang.String
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "hello", targetNamespace = "http://wspedido/", className = "wspedido.Hello")
-    @ResponseWrapper(localName = "helloResponse", targetNamespace = "http://wspedido/", className = "wspedido.HelloResponse")
-    @Action(input = "http://wspedido/WSPedido/helloRequest", output = "http://wspedido/WSPedido/helloResponse")
-    public String hello(
-        @WebParam(name = "name", targetNamespace = "")
-        String name);
-
-    /**
-     * 
-     * @param listaIt
-     * @param idClte
-     * @return
-     *     returns int
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "altaPedido", targetNamespace = "http://wspedido/", className = "wspedido.AltaPedido")
-    @ResponseWrapper(localName = "altaPedidoResponse", targetNamespace = "http://wspedido/", className = "wspedido.AltaPedidoResponse")
-    @Action(input = "http://wspedido/WSPedido/altaPedidoRequest", output = "http://wspedido/WSPedido/altaPedidoResponse")
-    public int altaPedido(
-        @WebParam(name = "id_clte", targetNamespace = "")
-        int idClte,
-        @WebParam(name = "lista_it", targetNamespace = "")
-        List<ClsItem> listaIt);
+    @RequestWrapper(localName = "sugerirSustitutos", targetNamespace = "http://wspedido/", className = "wspedido.SugerirSustitutos")
+    @ResponseWrapper(localName = "sugerirSustitutosResponse", targetNamespace = "http://wspedido/", className = "wspedido.SugerirSustitutosResponse")
+    @Action(input = "http://wspedido/WSPedido/sugerirSustitutosRequest", output = "http://wspedido/WSPedido/sugerirSustitutosResponse")
+    public String sugerirSustitutos(
+        @WebParam(name = "id_prod_original", targetNamespace = "")
+        int idProdOriginal,
+        @WebParam(name = "cantidad_requerida", targetNamespace = "")
+        int cantidadRequerida);
 
 }

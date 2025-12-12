@@ -24,6 +24,10 @@
         <partnerLink name="Apoyo_3_Envios" xmlns:tns="http://enterprise.netbeans.org/bpel/WS_EnviosWrapper" partnerLinkType="tns:WS_EnviosLinkType" partnerRole="WS_EnviosRole"/>
     </partnerLinks>
     <variables>
+        <variable name="SugerirSustitutosOut" xmlns:tns="http://wspedido/" messageType="tns:sugerirSustitutosResponse"/>
+        <variable name="SugerirSustitutosIn" xmlns:tns="http://wspedido/" messageType="tns:sugerirSustitutos"/>
+        <variable name="MensajeErrorTemp" type="xs:string"/>
+        
         <variable name="Alta_envioOut" xmlns:tns="http://ws_envios/" messageType="tns:alta_envioResponse"/>
         <variable name="Alta_envioIn" xmlns:tns="http://ws_envios/" messageType="tns:alta_envio"/>
         <variable name="SolicitaAutorizacionOut" xmlns:tns="http://ws_solicita_autorizacion/" messageType="tns:solicitaAutorizacionResponse"/>
@@ -50,6 +54,10 @@
             <copy>
                 <from>$SolicitarPedidoOperationIn.solicitudPedido/ns0:idCllte</from>
                 <to>$AltaPedidoIn.parameters/id_clte</to>
+            </copy>
+            <copy>
+                <from>$SolicitarPedidoOperationIn.solicitudPedido/ns0:restriccionCalidad</from>
+                <to>$AltaPedidoIn.parameters/restriccion_calidad</to>
             </copy>
         </assign>
         <forEach name="ForEach1" parallel="no" counterName="ForEach1Counter">
@@ -90,17 +98,48 @@
             <sequence name="Sequence1">
                 <assign name="Assign3">
                     <copy>
-                            <from>$AltaPedidoOut.parameters/return</from>
-                                <to>$MontoCOIn.parameters/id_CO</to>
-                        </copy>
+                        <from>$AltaPedidoOut.parameters/return</from>
+                        <to>$MontoCOIn.parameters/id_CO</to>
+                    </copy>
                 </assign>
                 <invoke name="ConsultaMonto" partnerLink="Apoyo_1_Almacen" operation="montoCO" xmlns:tns="http://wspedido/" portType="tns:WSPedido" inputVariable="MontoCOIn" outputVariable="MontoCOOut"/>
             </sequence>
             <else>
                 <sequence name="Sequence2">
-                    <assign name="Assign4">
+                    <assign name="InitFaultMsg">
                         <copy>
-                            <from>'No se puede surtir el pedido'</from>
+                            <from>'No se puede surtir el pedido por falta de stock o lotes incompatibles. Sugerencias: '</from>
+                            <to>$MensajeErrorTemp</to>
+                        </copy>
+                    </assign>
+                    <forEach name="ForEachSugerencias" parallel="no" counterName="SugerenciaCounter">
+                        <startCounterValue>1</startCounterValue>
+                        <finalCounterValue>count($SolicitarPedidoOperationIn.solicitudPedido/ns0:lista_items/ns0:idProd)</finalCounterValue>
+                        <scope name="ScopeSugerencias">
+                            <sequence>
+                                <assign name="AssignInputSugerencia">
+                                    <copy>
+                                        <from>$SolicitarPedidoOperationIn.solicitudPedido/ns0:lista_items[$SugerenciaCounter]/ns0:idProd</from>
+                                        <to>$SugerirSustitutosIn.parameters/id_prod_original</to>
+                                    </copy>
+                                    <copy>
+                                        <from>$SolicitarPedidoOperationIn.solicitudPedido/ns0:lista_items[$SugerenciaCounter]/ns0:cantidad</from>
+                                        <to>$SugerirSustitutosIn.parameters/cantidad_requerida</to>
+                                    </copy>
+                                </assign>
+                                <invoke name="InvocarSugerencia" partnerLink="Apoyo_1_Almacen" operation="sugerirSustitutos" xmlns:tns="http://wspedido/" portType="tns:WSPedido" inputVariable="SugerirSustitutosIn" outputVariable="SugerirSustitutosOut"/>
+                                <assign name="AppendSugerencia">
+                                    <copy>
+                                        <from>concat($MensajeErrorTemp, ' [Prod ', $SolicitarPedidoOperationIn.solicitudPedido/ns0:lista_items[$SugerenciaCounter]/ns0:idProd, ': ', $SugerirSustitutosOut.parameters/return, '] ')</from>
+                                        <to>$MensajeErrorTemp</to>
+                                    </copy>
+                                </assign>
+                            </sequence>
+                        </scope>
+                    </forEach>
+                    <assign name="AssignFaultFinal">
+                        <copy>
+                            <from>$MensajeErrorTemp</from>
                             <to>$Fault1FaultVar.excepcionPedido/ns0:message</to>
                         </copy>
                     </assign>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://j2ee.netbeans.org/wsdl/4_Bpel_Tienda/src/BpelIntegrado" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="Integrado_Bpel_Tienda_CA" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="Integrado_Bpel_Tienda_CA">
+  <import location="http://lenovoviajera.tailcb834.ts.net.:9080/Integrado_Bpel_Tienda_CA-sun-http-binding/Integrado_Bpel_Tienda/BpelIntegrado.wsdl" namespace="http://j2ee.netbeans.org/wsdl/4_Bpel_Tienda/src/BpelIntegrado">
+    </import>
+  <portType name="dummyCasaPortType">
+  </portType>
+  <binding name="casaBinding1" type="ns:BpelIntegradoPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="SolicitarPedidoOperation">
+      <soap:operation/>
+      <input name="input1">
+        <soap:body use="literal"/>
+      </input>
+      <output name="output1">
+        <soap:body use="literal"/>
+      </output>
+      <fault name="fault1">
+        <soap:fault name="fault1" use="literal"/>
+      </fault>
+    </operation>
+  </binding>
+  <service name="Integrado_Bpel_Tienda_CAService1">
+    <port binding="tns:casaBinding1" name="casaPort1">
+      <soap:address location="http://lenovoviajera.tailcb834.ts.net.:9080/Integrado_Bpel_Tienda_CAService1/casaPort1"/>
+    </port>
+  </service>
+</definitions>

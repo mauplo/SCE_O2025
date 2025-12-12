@@ -1,0 +1,12 @@
+<soapenv:Envelope xsi:schemaLocation="http://schemas.xmlsoap.org/soap/envelope/ http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:bpe="http://xml.netbeans.org/schema/BpelIntegrado">
+  <soapenv:Body>
+    <bpe:eltoSolicitud>
+      <bpe:idCllte>1</bpe:idCllte>
+      <bpe:lista_items>
+        <bpe:idProd>6</bpe:idProd>
+        <bpe:cantidad>30</bpe:cantidad>
+      </bpe:lista_items>
+      <bpe:restriccionCalidad>false</bpe:restriccionCalidad>
+    </bpe:eltoSolicitud>
+  </soapenv:Body>
+</soapenv:Envelope>

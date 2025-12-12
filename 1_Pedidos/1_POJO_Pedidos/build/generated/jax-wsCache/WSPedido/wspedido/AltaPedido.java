@@ -21,6 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="id_clte" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="lista_it" type="{http://wspedido/}clsItem" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="restriccion_calidad" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -32,7 +33,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "altaPedido", propOrder = {
     "idClte",
-    "listaIt"
+    "listaIt",
+    "restriccionCalidad"
 })
 public class AltaPedido {
 
@@ -40,6 +42,8 @@ public class AltaPedido {
     protected int idClte;
     @XmlElement(name = "lista_it")
     protected List<ClsItem> listaIt;
+    @XmlElement(name = "restriccion_calidad")
+    protected boolean restriccionCalidad;
 
     /**
      * Gets the value of the idClte property.
@@ -84,6 +88,22 @@ public class AltaPedido {
             listaIt = new ArrayList<ClsItem>();
         }
         return this.listaIt;
+    }
+
+    /**
+     * Gets the value of the restriccionCalidad property.
+     * 
+     */
+    public boolean isRestriccionCalidad() {
+        return restriccionCalidad;
+    }
+
+    /**
+     * Sets the value of the restriccionCalidad property.
+     * 
+     */
+    public void setRestriccionCalidad(boolean value) {
+        this.restriccionCalidad = value;
     }
 
 }

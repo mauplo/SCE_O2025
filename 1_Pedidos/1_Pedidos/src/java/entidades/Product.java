@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author rafael
+ * @author RGAMBOAH
  */
 @Entity
 @Table(name = "PRODUCT")
@@ -46,7 +46,10 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Product.findByExistencia", query = "SELECT p FROM Product p WHERE p.existencia = :existencia")
     , @NamedQuery(name = "Product.findByGrosor", query = "SELECT p FROM Product p WHERE p.grosor = :grosor")
     , @NamedQuery(name = "Product.findByFibra", query = "SELECT p FROM Product p WHERE p.fibra = :fibra")
-    , @NamedQuery(name = "Product.findByMarca", query = "SELECT p FROM Product p WHERE p.marca = :marca")})
+    , @NamedQuery(name = "Product.findByMarca", query = "SELECT p FROM Product p WHERE p.marca = :marca")
+    // QUERY PARA SUSTITUTOS: Busca productos con mismo grosor y fibra, diferente ID, y con existencia suficiente
+    , @NamedQuery(name = "Product.findSubstitutes", query = "SELECT p FROM Product p WHERE p.grosor = :grosor AND p.fibra = :fibra AND p.id <> :originalId AND p.existencia >= :cantidadRequerida")
+})
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -60,7 +63,6 @@ public class Product implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "NAME")
     private String name;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Column(name = "PRICE")
@@ -88,6 +90,17 @@ public class Product implements Serializable {
     @Size(max = 45)
     @Column(name = "MARCA")
     private String marca;
+
+    // NUEVOS CAMPOS REQUERIDOS
+    @Size(max = 20)
+    @Column(name = "LOTE")
+    private String lote;
+
+    @Column(name = "ES_TEMPORADA")
+    private Short esTemporada;
+
+    @Column(name = "DESCUENTO")
+    private BigDecimal descuento;
 
     @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
@@ -159,29 +172,23 @@ public class Product implements Serializable {
     }
     
     // Getters and Setters for new fields
-    public String getGrosor() {
-        return grosor;
-    }
+    public String getGrosor() { return grosor; }
+    public void setGrosor(String grosor) { this.grosor = grosor; }
 
-    public void setGrosor(String grosor) {
-        this.grosor = grosor;
-    }
+    public String getFibra() { return fibra; }
+    public void setFibra(String fibra) { this.fibra = fibra; }
 
-    public String getFibra() {
-        return fibra;
-    }
+    public String getMarca() { return marca; }
+    public void setMarca(String marca) { this.marca = marca; }
 
-    public void setFibra(String fibra) {
-        this.fibra = fibra;
-    }
+    public String getLote() { return lote; }
+    public void setLote(String lote) { this.lote = lote; }
 
-    public String getMarca() {
-        return marca;
-    }
+    public Short getEsTemporada() { return esTemporada; }
+    public void setEsTemporada(Short esTemporada) { this.esTemporada = esTemporada; }
 
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
+    public BigDecimal getDescuento() { return descuento; }
+    public void setDescuento(BigDecimal descuento) { this.descuento = descuento; }
 
     public Category getCategoryId() {
         return categoryId;

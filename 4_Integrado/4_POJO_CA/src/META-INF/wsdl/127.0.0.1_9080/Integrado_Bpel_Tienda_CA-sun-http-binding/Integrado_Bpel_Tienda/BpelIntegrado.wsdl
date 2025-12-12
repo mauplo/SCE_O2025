@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://xml.netbeans.org/schema/BpelIntegrado" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:tns="http://j2ee.netbeans.org/wsdl/4_Bpel_Tienda/src/BpelIntegrado" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="BpelIntegrado" targetNamespace="http://j2ee.netbeans.org/wsdl/4_Bpel_Tienda/src/BpelIntegrado">
+    <types>
+        <xsd:schema targetNamespace="http://j2ee.netbeans.org/wsdl/4_Bpel_Tienda/src/BpelIntegrado">
+            <xsd:import namespace="http://xml.netbeans.org/schema/BpelIntegrado" schemaLocation="BpelIntegrado.xsd"/>
+        </xsd:schema>
+    </types>
+    <message name="SolicitarPedidoOperationRequest">
+        <part element="ns:eltoSolicitud" name="solicitudPedido"/>
+    </message>
+    <message name="SolicitarPedidoOperationResponse">
+        <part element="ns:eltoRespuesta" name="respuestaPedido"/>
+    </message>
+    <message name="SolicitarPedidoOperationFault">
+        <part element="ns:eltoExepcion" name="excepcionPedido"/>
+    </message>
+    <portType name="BpelIntegradoPortType">
+        <operation name="SolicitarPedidoOperation">
+            <input message="tns:SolicitarPedidoOperationRequest" name="input1"/>
+            <output message="tns:SolicitarPedidoOperationResponse" name="output1"/>
+            <fault message="tns:SolicitarPedidoOperationFault" name="fault1"/>
+        </operation>
+    </portType>
+    <plnk:partnerLinkType name="BpelIntegrado">
+        <!-- A partner link type is automatically generated when a new port type is added. Partner link types are used by BPEL processes. 
+In a BPEL process, a partner link represents the interaction between the BPEL process and a partner service. Each partner link is associated with a partner link type.
+A partner link type characterizes the conversational relationship between two services. The partner link type can have one or two roles.-->
+        <plnk:role name="BpelIntegradoPortTypeRole" portType="tns:BpelIntegradoPortType"/>
+    </plnk:partnerLinkType>
+</definitions>

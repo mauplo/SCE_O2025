@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:9080/Integrado_Bpel_Tienda_CAService1/casaPort1?WSDL" uri="wsdl/localhost_9080/Integrado_Bpel_Tienda_CAService1/casaPort1.wsdl"/>
+    <system systemId="http://localhost:16373/1_Pedidos/WSPedido?WSDL" uri="wsdl/localhost_16373/1_Pedidos/WSPedido.wsdl"/>
+    <system systemId="http://localhost:16373/1_Pedidos/WSPedido?xsd=1" uri="wsdl/localhost_16373/1_Pedidos/WSPedido.xsd_1.xsd"/>
+    <system systemId="http://127.0.0.1:9080/Integrado_Bpel_Tienda_CAService1/casaPort1?WSDL" uri="wsdl/127.0.0.1_9080/Integrado_Bpel_Tienda_CAService1/casaPort1.wsdl"/>
+    <system systemId="http://127.0.0.1:9080/Integrado_Bpel_Tienda_CA-sun-http-binding/Integrado_Bpel_Tienda/BpelIntegrado.wsdl" uri="wsdl/127.0.0.1_9080/Integrado_Bpel_Tienda_CA-sun-http-binding/Integrado_Bpel_Tienda/BpelIntegrado.wsdl"/>
+    <system systemId="http://127.0.0.1:9080/Integrado_Bpel_Tienda_CA-sun-http-binding/Integrado_Bpel_Tienda/BpelIntegrado.xsd" uri="wsdl/127.0.0.1_9080/Integrado_Bpel_Tienda_CA-sun-http-binding/Integrado_Bpel_Tienda/BpelIntegrado.xsd"/>
+</catalog>

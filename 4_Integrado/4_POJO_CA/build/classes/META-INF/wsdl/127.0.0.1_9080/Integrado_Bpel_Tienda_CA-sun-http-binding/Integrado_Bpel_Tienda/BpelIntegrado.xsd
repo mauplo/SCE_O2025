@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:tns="http://xml.netbeans.org/schema/BpelIntegrado" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://xml.netbeans.org/schema/BpelIntegrado">
+    <xsd:complexType name="cmplx_solicitud">
+        <xsd:sequence>
+            <xsd:element name="idCllte" type="xsd:int"/>
+            <xsd:element maxOccurs="unbounded" name="lista_items" type="tns:cmplx_ClsItem"/>
+            <xsd:element name="restriccionCalidad" type="xsd:boolean"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="cmplx_respuesta">
+        <xsd:sequence>
+             <xsd:element name="numPedido" type="xsd:int"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="cmplx_ClsItem">
+        <xsd:sequence>
+            <xsd:element name="idProd" type="xsd:int"/>
+            <xsd:element name="cantidad" type="xsd:int"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="cmplx_exepcion">
+        <xsd:sequence>
+            <xsd:element name="message" type="xsd:string"/>
+         </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="eltoRespuesta" type="tns:cmplx_respuesta"/>
+    <xsd:element name="eltoExepcion" type="tns:cmplx_exepcion"/>
+    <xsd:element name="eltoSolicitud" type="tns:cmplx_solicitud"/>
+</xsd:schema>
