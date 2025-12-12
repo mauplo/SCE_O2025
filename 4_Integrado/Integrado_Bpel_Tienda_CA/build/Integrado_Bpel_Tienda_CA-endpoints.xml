@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<endpoints xmlns="http://xml.netbeans.org/schema/endPoints" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xml.netbeans.org/schema/endPoints endPoints.xsd">
+    <project>
+        <name>Integrado_Bpel_Tienda_CA</name>
+        <version>1.0</version>
+        <description>description</description>
+    </project>
+    <team>
+        <name>unknown team</name>
+        <contact>no contact provided</contact>
+    </team>
+    <endpoint>
+        <type>provider</type>
+        <endpoint-name>BpelIntegradoPortTypeRole_myRole</endpoint-name>
+        <service-name>
+            <namespace>http://enterprise.netbeans.org/bpel/4_Bpel_Tienda/4_Bpel_Tienda</namespace>
+            <localname>RecepcionPedidos</localname>
+        </service-name>
+        <interface-name>
+            <namespace>http://j2ee.netbeans.org/wsdl/4_Bpel_Tienda/src/BpelIntegrado</namespace>
+            <localname>BpelIntegradoPortType</localname>
+        </interface-name>
+        <description>description of the service provided or consumed through this endPoint</description>
+    </endpoint>
+    <endpoint>
+        <type>consumer</type>
+        <endpoint-name>WSPedidoRole_partnerRole</endpoint-name>
+        <service-name>
+            <namespace>http://enterprise.netbeans.org/bpel/4_Bpel_Tienda/4_Bpel_Tienda</namespace>
+            <localname>Apoyo_1_Almacen</localname>
+        </service-name>
+        <interface-name>
+            <namespace>http://wspedido/</namespace>
+            <localname>WSPedido</localname>
+        </interface-name>
+        <description>description of the service provided or consumed through this endPoint</description>
+    </endpoint>
+    <endpoint>
+        <type>consumer</type>
+        <endpoint-name>WS_Solicita_AutorizacionRole_partnerRole</endpoint-name>
+        <service-name>
+            <namespace>http://enterprise.netbeans.org/bpel/4_Bpel_Tienda/4_Bpel_Tienda</namespace>
+            <localname>Apoyo_2_Autorizacion</localname>
+        </service-name>
+        <interface-name>
+            <namespace>http://ws_solicita_autorizacion/</namespace>
+            <localname>WS_Solicita_Autorizacion</localname>
+        </interface-name>
+        <description>description of the service provided or consumed through this endPoint</description>
+    </endpoint>
+    <endpoint>
+        <type>consumer</type>
+        <endpoint-name>WS_EnviosRole_partnerRole</endpoint-name>
+        <service-name>
+            <namespace>http://enterprise.netbeans.org/bpel/4_Bpel_Tienda/4_Bpel_Tienda</namespace>
+            <localname>Apoyo_3_Envios</localname>
+        </service-name>
+        <interface-name>
+            <namespace>http://ws_envios/</namespace>
+            <localname>WS_Envios</localname>
+        </interface-name>
+        <description>description of the service provided or consumed through this endPoint</description>
+    </endpoint>
+</endpoints>

@@ -1,0 +1,4 @@
+Bundle-Name: Integrado_Bpel_Tienda_CA
+Bundle-SymbolicName: Integrado_Bpel_Tienda_CA
+Bundle-ManifestVersion: 2
+Bundle-Version: 1.0.0

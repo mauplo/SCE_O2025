@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:16373/Parcial_202503_02_sol/WS_Solicita_Autorizacion?WSDL" uri="xml-resources/web-service-references/WS_Solicita_Autorizacion/wsdl/localhost_8080/Parcial_202503_02_sol/WS_Solicita_Autorizacion.wsdl"/>
+    <system systemId="http://localhost:16373/Parcial_202503_02_sol/WS_Solicita_Autorizacion?xsd=1" uri="xml-resources/web-service-references/WS_Solicita_Autorizacion/wsdl/localhost_8080/Parcial_202503_02_sol/WS_Solicita_Autorizacion.xsd_1.xsd"/>
+    <system systemId="http://localhost:16373/Parcial_Autorizaciones_sol/WSCliente?WSDL" uri="xml-resources/web-service-references/WSCliente/wsdl/localhost_8080/Parcial_Autorizaciones_sol/WSCliente.wsdl"/>
+    <system systemId="http://localhost:16373/Parcial_Autorizaciones_sol/WSCliente?xsd=1" uri="xml-resources/web-service-references/WSCliente/wsdl/localhost_8080/Parcial_Autorizaciones_sol/WSCliente.xsd_1.xsd"/>
+    <system systemId="http://localhost:16373/Parcial_Autorizaciones_sol/WS_Solicita_Autorizacion?WSDL" uri="xml-resources/web-service-references/WS_Solicita_Autorizacion/wsdl/localhost_8080/Parcial_Autorizaciones_sol/WS_Solicita_Autorizacion.wsdl"/>
+    <system systemId="http://localhost:16373/Parcial_Autorizaciones_sol/WS_Solicita_Autorizacion?xsd=1" uri="xml-resources/web-service-references/WS_Solicita_Autorizacion/wsdl/localhost_8080/Parcial_Autorizaciones_sol/WS_Solicita_Autorizacion.xsd_1.xsd"/>
+    <system systemId="http://localhost:16373/2_Autorizaciones/WS_Solicita_Autorizacion?WSDL" uri="xml-resources/web-service-references/WS_Solicita_Autorizacion/wsdl/localhost_28346/2_Autorizaciones/WS_Solicita_Autorizacion.wsdl"/>
+    <system systemId="http://localhost:16373/2_Autorizaciones/WS_Solicita_Autorizacion?xsd=1" uri="xml-resources/web-service-references/WS_Solicita_Autorizacion/wsdl/localhost_28346/2_Autorizaciones/WS_Solicita_Autorizacion.xsd_1.xsd"/>
+</catalog>

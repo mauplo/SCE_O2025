@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<definitions
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="WS_Solicita_AutorizacionWrapper" targetNamespace="http://enterprise.netbeans.org/bpel/WS_Solicita_AutorizacionWrapper" xmlns:tns="http://enterprise.netbeans.org/bpel/WS_Solicita_AutorizacionWrapper" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:ns="http://ws_solicita_autorizacion/">
+    <import location="http://localhost:16373/2_Autorizaciones/WS_Solicita_Autorizacion?WSDL" namespace="http://ws_solicita_autorizacion/"/>
+    <plnk:partnerLinkType name="WS_Solicita_AutorizacionLinkType">
+        <plnk:role name="WS_Solicita_AutorizacionRole" portType="ns:WS_Solicita_Autorizacion"/>
+    </plnk:partnerLinkType>
+</definitions>

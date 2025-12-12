@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <nextCatalog catalog="nbproject/private/retriever/catalog.xml"/>
+    <system systemId="http://localhost:16373/1_Pedidos/WSPedido?WSDL" uri="src/apoyos/1_Almacen/localhost_28346/1_Pedidos/WSPedido.wsdl"/>
+    <system systemId="http://localhost:16373/1_Pedidos/WSPedido?xsd=1" uri="src/apoyos/1_Almacen/localhost_28346/1_Pedidos/WSPedido.xsd_1.xsd"/>
+    <system systemId="http://localhost:16373/2_Autorizaciones/WS_Solicita_Autorizacion?WSDL" uri="src/apoyos/2_Credito/localhost_28346/2_Autorizaciones/WS_Solicita_Autorizacion.wsdl"/>
+    <system systemId="http://localhost:16373/2_Autorizaciones/WS_Solicita_Autorizacion?xsd=1" uri="src/apoyos/2_Credito/localhost_28346/2_Autorizaciones/WS_Solicita_Autorizacion.xsd_1.xsd"/>
+    <system systemId="http://localhost:16373/3_Envios/WS_Envios?WSDL" uri="src/apoyos/3_Envios/localhost_28346/3_Envios/WS_Envios.wsdl"/>
+    <system systemId="http://localhost:16373/3_Envios/WS_Envios?xsd=1" uri="src/apoyos/3_Envios/localhost_28346/3_Envios/WS_Envios.xsd_1.xsd"/>
+</catalog>

@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown. --><xs:schema xmlns:tns="http://ws_solicita_autorizacion/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://ws_solicita_autorizacion/">
+
+<xs:element name="Excepcion_Negocio" type="tns:Excepcion_Negocio"/>
+
+<xs:element name="catalogoClientes" type="tns:catalogoClientes"/>
+
+<xs:element name="catalogoClientesResponse" type="tns:catalogoClientesResponse"/>
+
+<xs:element name="catalogoProveedores" type="tns:catalogoProveedores"/>
+
+<xs:element name="catalogoProveedoresResponse" type="tns:catalogoProveedoresResponse"/>
+
+<xs:element name="cliente" type="tns:cliente"/>
+
+<xs:element name="hello" type="tns:hello"/>
+
+<xs:element name="helloResponse" type="tns:helloResponse"/>
+
+<xs:element name="proveedor" type="tns:proveedor"/>
+
+<xs:element name="solicitaAutorizacion" type="tns:solicitaAutorizacion"/>
+
+<xs:element name="solicitaAutorizacionResponse" type="tns:solicitaAutorizacionResponse"/>
+
+<xs:complexType name="catalogoClientes">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="catalogoClientesResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:cliente" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="cliente">
+<xs:sequence>
+<xs:element name="calleNum" type="xs:string" minOccurs="0"/>
+<xs:element name="colonia" type="xs:string" minOccurs="0"/>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+<xs:element name="entidad" type="xs:string" minOccurs="0"/>
+<xs:element name="fechaStatus" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="fechaUltSolicitud" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="lineaCredito" type="xs:decimal" minOccurs="0"/>
+<xs:element name="montoDisponible" type="xs:decimal" minOccurs="0"/>
+<xs:element name="montoMax" type="xs:decimal" minOccurs="0"/>
+<xs:element name="montoUtilizado" type="xs:decimal" minOccurs="0"/>
+<xs:element name="municipio" type="xs:string" minOccurs="0"/>
+<xs:element name="nombre" type="xs:string" minOccurs="0"/>
+<xs:element name="rfc" type="xs:string" minOccurs="0"/>
+<xs:element name="status" type="xs:string" minOccurs="0"/>
+<xs:element name="tel" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="hello">
+<xs:sequence>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="helloResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="solicitaAutorizacion">
+<xs:sequence>
+<xs:element name="idClte" type="xs:int"/>
+<xs:element name="idProv" type="xs:int"/>
+<xs:element name="dblMonto" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="solicitaAutorizacionResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Excepcion_Negocio">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"/>
+<xs:element name="msg" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="catalogoProveedores">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="catalogoProveedoresResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:proveedor" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="proveedor">
+<xs:sequence>
+<xs:element name="calleNum" type="xs:string" minOccurs="0"/>
+<xs:element name="colonia" type="xs:string" minOccurs="0"/>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+<xs:element name="entidad" type="xs:string" minOccurs="0"/>
+<xs:element name="fechaStatus" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="fechaUltOperacion" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="montoAdeudado" type="xs:decimal" minOccurs="0"/>
+<xs:element name="municipio" type="xs:string" minOccurs="0"/>
+<xs:element name="nombre" type="xs:string" minOccurs="0"/>
+<xs:element name="rfc" type="xs:string" minOccurs="0"/>
+<xs:element name="status" type="xs:string" minOccurs="0"/>
+<xs:element name="tel" type="xs:string" minOccurs="0"/>
+<xs:element name="tipoOp" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

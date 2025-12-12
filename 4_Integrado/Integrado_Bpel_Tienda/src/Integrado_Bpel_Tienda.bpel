@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<process
+    name="Integrado_Bpel_Tienda"
+    targetNamespace="http://enterprise.netbeans.org/bpel/4_Bpel_Tienda/4_Bpel_Tienda"
+    xmlns:tns="http://enterprise.netbeans.org/bpel/4_Bpel_Tienda/4_Bpel_Tienda"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+    xmlns:sxt="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Trace" 
+    xmlns:sxed="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Editor2"
+    xmlns:sxat="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Attachment"
+    xmlns:sxeh="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/ErrorHandling" xmlns:ns0="http://xml.netbeans.org/schema/BpelIntegrado" xmlns:ns1="http://ws_solicita_autorizacion/">
+    <import namespace="http://enterprise.netbeans.org/bpel/WSPedidoWrapper" location="WSPedidoWrapper.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://wspedido/" location="http://localhost:16373/1_Pedidos/WSPedido?WSDL" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://enterprise.netbeans.org/bpel/WS_Solicita_AutorizacionWrapper" location="WS_Solicita_AutorizacionWrapper.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://ws_solicita_autorizacion/" location="http://localhost:16373/2_Autorizaciones/WS_Solicita_Autorizacion?WSDL" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://enterprise.netbeans.org/bpel/WS_EnviosWrapper" location="WS_EnviosWrapper.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://ws_envios/" location="http://localhost:16373/3_Envios/WS_Envios?WSDL" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://j2ee.netbeans.org/wsdl/4_Bpel_Tienda/src/BpelIntegrado" location="BpelIntegrado.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <partnerLinks>
+        <partnerLink name="RecepcionPedidos" xmlns:tns="http://j2ee.netbeans.org/wsdl/4_Bpel_Tienda/src/BpelIntegrado" partnerLinkType="tns:BpelIntegrado" myRole="BpelIntegradoPortTypeRole"/>
+        <partnerLink name="Apoyo_1_Almacen" xmlns:tns="http://enterprise.netbeans.org/bpel/WSPedidoWrapper" partnerLinkType="tns:WSPedidoLinkType" partnerRole="WSPedidoRole"/>
+        <partnerLink name="Apoyo_2_Autorizacion" xmlns:tns="http://enterprise.netbeans.org/bpel/WS_Solicita_AutorizacionWrapper" partnerLinkType="tns:WS_Solicita_AutorizacionLinkType" partnerRole="WS_Solicita_AutorizacionRole"/>
+        <partnerLink name="Apoyo_3_Envios" xmlns:tns="http://enterprise.netbeans.org/bpel/WS_EnviosWrapper" partnerLinkType="tns:WS_EnviosLinkType" partnerRole="WS_EnviosRole"/>
+    </partnerLinks>
+    <variables>
+        <variable name="Alta_envioOut" xmlns:tns="http://ws_envios/" messageType="tns:alta_envioResponse"/>
+        <variable name="Alta_envioIn" xmlns:tns="http://ws_envios/" messageType="tns:alta_envio"/>
+        <variable name="SolicitaAutorizacionOut" xmlns:tns="http://ws_solicita_autorizacion/" messageType="tns:solicitaAutorizacionResponse"/>
+        <variable name="SolicitaAutorizacionIn" xmlns:tns="http://ws_solicita_autorizacion/" messageType="tns:solicitaAutorizacion"/>
+        <variable name="MontoCOOut" xmlns:tns="http://wspedido/" messageType="tns:montoCOResponse"/>
+        <variable name="MontoCOIn" xmlns:tns="http://wspedido/" messageType="tns:montoCO"/>
+        <variable name="Fault1FaultVar" xmlns:tns="http://j2ee.netbeans.org/wsdl/4_Bpel_Tienda/src/BpelIntegrado" messageType="tns:SolicitarPedidoOperationFault"/>
+        <variable name="AltaPedidoOut" xmlns:tns="http://wspedido/" messageType="tns:altaPedidoResponse"/>
+        <variable name="AltaPedidoIn" xmlns:tns="http://wspedido/" messageType="tns:altaPedido">
+            <sxed:editor>
+                <sxed:predicate path="$AltaPedidoIn.parameters/lista_it[$ForEach1Counter]" source="to"/>
+            </sxed:editor>
+        </variable>
+        <variable name="SolicitarPedidoOperationOut" xmlns:tns="http://j2ee.netbeans.org/wsdl/4_Bpel_Tienda/src/BpelIntegrado" messageType="tns:SolicitarPedidoOperationResponse"/>
+        <variable name="SolicitarPedidoOperationIn" xmlns:tns="http://j2ee.netbeans.org/wsdl/4_Bpel_Tienda/src/BpelIntegrado" messageType="tns:SolicitarPedidoOperationRequest">
+            <sxed:editor>
+                <sxed:predicate path="$SolicitarPedidoOperationIn.solicitudPedido/ns0:lista_items[$ForEach1Counter]" source="from"/>
+            </sxed:editor>
+        </variable>
+    </variables>
+    <sequence>
+        <receive name="Receive1" createInstance="yes" partnerLink="RecepcionPedidos" operation="SolicitarPedidoOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/4_Bpel_Tienda/src/BpelIntegrado" portType="tns:BpelIntegradoPortType" variable="SolicitarPedidoOperationIn"/>
+        <assign name="Assign1">
+            <copy>
+                <from>$SolicitarPedidoOperationIn.solicitudPedido/ns0:idCllte</from>
+                <to>$AltaPedidoIn.parameters/id_clte</to>
+            </copy>
+        </assign>
+        <forEach name="ForEach1" parallel="no" counterName="ForEach1Counter">
+            <startCounterValue>1</startCounterValue>
+            <finalCounterValue>count($SolicitarPedidoOperationIn.solicitudPedido/ns0:lista_items/ns0:idProd)</finalCounterValue>
+            <scope name="Scope1">
+                <assign name="Assign2">
+                    <copy>
+                        <from>$SolicitarPedidoOperationIn.solicitudPedido/ns0:lista_items[$ForEach1Counter]/ns0:cantidad
+                            <sxed:editor>
+                                <sxed:predicate path="$SolicitarPedidoOperationIn.solicitudPedido/ns0:lista_items[$ForEach1Counter]" source="from"/>
+                            </sxed:editor>
+                        </from>
+                        <to>$AltaPedidoIn.parameters/lista_it[$ForEach1Counter]/cantidad
+                            <sxed:editor>
+                                <sxed:predicate path="$AltaPedidoIn.parameters/lista_it[$ForEach1Counter]" source="to"/>
+                            </sxed:editor>
+                        </to>
+                    </copy>
+                    <copy>
+                        <from>$SolicitarPedidoOperationIn.solicitudPedido/ns0:lista_items[$ForEach1Counter]/ns0:idProd
+                            <sxed:editor>
+                                <sxed:predicate path="$SolicitarPedidoOperationIn.solicitudPedido/ns0:lista_items[$ForEach1Counter]" source="from"/>
+                            </sxed:editor>
+                        </from>
+                        <to>$AltaPedidoIn.parameters/lista_it[$ForEach1Counter]/id_prod
+                            <sxed:editor>
+                                <sxed:predicate path="$AltaPedidoIn.parameters/lista_it[$ForEach1Counter]" source="to"/>
+                            </sxed:editor>
+                        </to>
+                    </copy>
+                </assign>
+            </scope>
+        </forEach>
+        <invoke name="ApartaPedido" partnerLink="Apoyo_1_Almacen" operation="altaPedido" xmlns:tns="http://wspedido/" portType="tns:WSPedido" inputVariable="AltaPedidoIn" outputVariable="AltaPedidoOut"/>
+        <if name="If1">
+            <condition>$AltaPedidoOut.parameters/return &gt; 0</condition>
+            <sequence name="Sequence1">
+                <assign name="Assign3">
+                    <copy>
+                            <from>$AltaPedidoOut.parameters/return</from>
+                                <to>$MontoCOIn.parameters/id_CO</to>
+                        </copy>
+                </assign>
+                <invoke name="ConsultaMonto" partnerLink="Apoyo_1_Almacen" operation="montoCO" xmlns:tns="http://wspedido/" portType="tns:WSPedido" inputVariable="MontoCOIn" outputVariable="MontoCOOut"/>
+            </sequence>
+            <else>
+                <sequence name="Sequence2">
+                    <assign name="Assign4">
+                        <copy>
+                            <from>'No se puede surtir el pedido'</from>
+                            <to>$Fault1FaultVar.excepcionPedido/ns0:message</to>
+                        </copy>
+                    </assign>
+                    <reply name="ExcepcionPorInexistencia" partnerLink="RecepcionPedidos" operation="SolicitarPedidoOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/4_Bpel_Tienda/src/BpelIntegrado" portType="tns:BpelIntegradoPortType" faultName="tns:fault1" variable="Fault1FaultVar"/>
+                </sequence>
+            </else>
+        </if>
+        <assign name="Assign5">
+            <copy>
+                <from>1</from>
+                <to>$SolicitaAutorizacionIn.parameters/idProv</to>
+            </copy>
+            <copy>
+                <from>$SolicitarPedidoOperationIn.solicitudPedido/ns0:idCllte</from>
+                <to>$SolicitaAutorizacionIn.parameters/idClte</to>
+            </copy>
+            <copy>
+                <from>$MontoCOOut.parameters/return</from>
+                <to>$SolicitaAutorizacionIn.parameters/dblMonto</to>
+            </copy>
+        </assign>
+        <scope name="Scope2">
+            <variables>
+                <variable name="VarExcepcionCredito" xmlns:tns="http://j2ee.netbeans.org/wsdl/4_Bpel_Tienda/src/BpelIntegrado" messageType="tns:SolicitarPedidoOperationFault"/>
+                <variable name="RestituyeProductosCOOut" xmlns:tns="http://wspedido/" messageType="tns:restituyeProductosCOResponse"/>
+                <variable name="RestituyeProductosCOIn" xmlns:tns="http://wspedido/" messageType="tns:restituyeProductosCO"/>
+            </variables>
+            <faultHandlers>
+                <catch faultName="ns1:Excepcion_Negocio" faultVariable="Exepcion_Credito" faultMessageType="ns1:Excepcion_Negocio">
+                    <sequence name="Sequence3">
+                        <assign name="Assign7">
+                            <copy>
+                                <from>$AltaPedidoOut.parameters/return</from>
+                                <to>$RestituyeProductosCOIn.parameters/id_CO</to>
+                            </copy>
+                        </assign>
+                        <invoke name="RegresaProductos" partnerLink="Apoyo_1_Almacen" operation="restituyeProductosCO" xmlns:tns="http://wspedido/" portType="tns:WSPedido" inputVariable="RestituyeProductosCOIn" outputVariable="RestituyeProductosCOOut"/>
+                        <assign name="Assign8">
+                            <copy>
+                                <from>$Exepcion_Credito.fault/msg</from>
+                                <to>$VarExcepcionCredito.excepcionPedido/ns0:message</to>
+                            </copy>
+                        </assign>
+                        <reply name="ExcepcionPorFaltaDeCredito" partnerLink="RecepcionPedidos" operation="SolicitarPedidoOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/4_Bpel_Tienda/src/BpelIntegrado" portType="tns:BpelIntegradoPortType" faultName="tns:fault1" variable="VarExcepcionCredito"/>
+                    </sequence>
+                </catch>
+            </faultHandlers>
+            <invoke name="SolicitaCredito" partnerLink="Apoyo_2_Autorizacion" operation="solicitaAutorizacion" portType="ns1:WS_Solicita_Autorizacion" inputVariable="SolicitaAutorizacionIn" outputVariable="SolicitaAutorizacionOut"/>
+        </scope>
+        <assign name="Assign6">
+            <copy>
+                <from>$SolicitarPedidoOperationIn.solicitudPedido/ns0:idCllte</from>
+                <to>$Alta_envioIn.parameters/id_clte</to>
+            </copy>
+            <copy>
+                <from>10</from>
+                <to>$Alta_envioIn.parameters/num_dias</to>
+            </copy>
+            <copy>
+                <from>$AltaPedidoOut.parameters/return</from>
+                <to>$Alta_envioIn.parameters/num_pedido</to>
+            </copy>
+        </assign>
+        <invoke name="RegistraEnvio" partnerLink="Apoyo_3_Envios" operation="alta_envio" xmlns:tns="http://ws_envios/" portType="tns:WS_Envios" inputVariable="Alta_envioIn" outputVariable="Alta_envioOut"/>
+        <assign name="Assign9">
+            <copy>
+                <from>$Alta_envioOut.parameters/return</from>
+                <to>$SolicitarPedidoOperationOut.respuestaPedido/ns0:numPedido</to>
+            </copy>
+        </assign>
+        <reply name="Reply1" partnerLink="RecepcionPedidos" operation="SolicitarPedidoOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/4_Bpel_Tienda/src/BpelIntegrado" portType="tns:BpelIntegradoPortType" variable="SolicitarPedidoOperationOut"/>
+    </sequence>
+</process>

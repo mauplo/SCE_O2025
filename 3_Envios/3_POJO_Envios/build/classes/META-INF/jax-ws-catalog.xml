@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:16373/3_Envios/WS_Envios?WSDL" uri="wsdl/localhost_8080/3_Envios/WS_Envios.wsdl"/>
+    <system systemId="http://localhost:16373/3_Envios/WS_Envios?xsd=1" uri="wsdl/localhost_8080/3_Envios/WS_Envios.xsd_1.xsd"/>
+    <system systemId="http://localhost:16373/3_Envios/WS_Envios?WSDL" uri="wsdl/localhost_28346/3_Envios/WS_Envios.wsdl"/>
+    <system systemId="http://localhost:16373/3_Envios/WS_Envios?xsd=1" uri="wsdl/localhost_28346/3_Envios/WS_Envios.xsd_1.xsd"/>
+</catalog>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jbi xmlns="http://java.sun.com/xml/ns/jbi" xmlns:ns1="http://enterprise.netbeans.org/bpel/4_Bpel_Tienda/4_Bpel_Tienda" xmlns:ns2="http://ws_envios/" xmlns:ns3="http://ws_solicita_autorizacion/" xmlns:ns4="http://wspedido/" xmlns:ns5="Integrado_Bpel_Tienda_CA" xmlns:ns6="http://j2ee.netbeans.org/wsdl/4_Bpel_Tienda/src/BpelIntegrado" version="1.0">
+    <services binding-component="true">
+        <provides endpoint-name="WS_EnviosPort" interface-name="ns2:WS_Envios" service-name="ns2:WS_Envios"/>
+        <provides endpoint-name="WS_Solicita_AutorizacionPort" interface-name="ns3:WS_Solicita_Autorizacion" service-name="ns3:WS_Solicita_Autorizacion"/>
+        <provides endpoint-name="WSPedidoPort" interface-name="ns4:WSPedido" service-name="ns4:WSPedido"/>
+        <consumes endpoint-name="casaPort1" interface-name="ns6:BpelIntegradoPortType" service-name="ns5:Integrado_Bpel_Tienda_CAService1"/>
+    </services>
+</jbi>

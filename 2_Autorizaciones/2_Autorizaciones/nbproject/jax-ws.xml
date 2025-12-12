@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jax-ws xmlns="http://www.netbeans.org/ns/jax-ws/1">
+  <services>
+    <service name="WSCliente">
+      <implementation-class>wscliente.WSCliente</implementation-class>
+    </service>
+    <service name="WS_Solicita_Autorizacion">
+      <implementation-class>ws_solicita_autorizacion.WS_Solicita_Autorizacion</implementation-class>
+    </service>
+  </services>
+  <clients/>
+</jax-ws>

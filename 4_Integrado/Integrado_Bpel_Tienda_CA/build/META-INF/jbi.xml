@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jbi xmlns="http://java.sun.com/xml/ns/jbi" xmlns:ns1="http://enterprise.netbeans.org/bpel/4_Bpel_Tienda/4_Bpel_Tienda" xmlns:ns2="http://ws_envios/" xmlns:ns3="http://ws_solicita_autorizacion/" xmlns:ns4="http://wspedido/" xmlns:ns5="Integrado_Bpel_Tienda_CA" xmlns:ns6="http://j2ee.netbeans.org/wsdl/4_Bpel_Tienda/src/BpelIntegrado" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/jbi ./jbi.xsd">
+    <service-assembly>
+        <identification>
+            <name>Integrado_Bpel_Tienda_CA</name>
+            <description>Represents the Service Assembly of Integrado_Bpel_Tienda_CA</description>
+        </identification>
+        <service-unit>
+            <identification>
+                <name>Integrado_Bpel_Tienda_CA-Integrado_Bpel_Tienda</name>
+                <description>Represents this Service Unit</description>
+            </identification>
+            <target>
+                <artifacts-zip>Integrado_Bpel_Tienda.jar</artifacts-zip>
+                <component-name>sun-bpel-engine</component-name>
+            </target>
+        </service-unit>
+        <service-unit>
+            <identification>
+                <name>Integrado_Bpel_Tienda_CA-sun-http-binding</name>
+                <description>Represents this Service Unit</description>
+            </identification>
+            <target>
+                <artifacts-zip>sun-http-binding.jar</artifacts-zip>
+                <component-name>sun-http-binding</component-name>
+            </target>
+        </service-unit>
+        <connections>
+            <connection>
+                <consumer endpoint-name="WS_EnviosRole_partnerRole" service-name="ns1:Apoyo_3_Envios"/>
+                <provider endpoint-name="WS_EnviosPort" service-name="ns2:WS_Envios"/>
+            </connection>
+            <connection>
+                <consumer endpoint-name="WS_Solicita_AutorizacionRole_partnerRole" service-name="ns1:Apoyo_2_Autorizacion"/>
+                <provider endpoint-name="WS_Solicita_AutorizacionPort" service-name="ns3:WS_Solicita_Autorizacion"/>
+            </connection>
+            <connection>
+                <consumer endpoint-name="WSPedidoRole_partnerRole" service-name="ns1:Apoyo_1_Almacen"/>
+                <provider endpoint-name="WSPedidoPort" service-name="ns4:WSPedido"/>
+            </connection>
+            <connection>
+                <consumer endpoint-name="casaPort1" service-name="ns5:Integrado_Bpel_Tienda_CAService1"/>
+                <provider endpoint-name="BpelIntegradoPortTypeRole_myRole" service-name="ns1:RecepcionPedidos"/>
+            </connection>
+        </connections>
+        <route-types xmlns="http://www.open-esb.net/xml/ns/jbi">
+            <source endpoint-name="WS_EnviosRole_partnerRole" mode="local" routing-rule="default" service-name="ns1:Apoyo_3_Envios">direct</source>
+            <source endpoint-name="WS_Solicita_AutorizacionRole_partnerRole" mode="local" routing-rule="default" service-name="ns1:Apoyo_2_Autorizacion">direct</source>
+            <source endpoint-name="WSPedidoRole_partnerRole" mode="local" routing-rule="default" service-name="ns1:Apoyo_1_Almacen">direct</source>
+            <source endpoint-name="casaPort1" mode="local" routing-rule="default" service-name="ns5:Integrado_Bpel_Tienda_CAService1">direct</source>
+        </route-types>
+        <interface-mapping xmlns="http://www.open-esb.net/xml/ns/jbi">
+            <implementation>
+                <by-provider endpoint-name="BpelIntegradoPortTypeRole_myRole" service-name="ns1:RecepcionPedidos"/>
+                <interface name="ns6:BpelIntegradoPortType"/>
+            </implementation>
+            <implementation>
+                <by-provider endpoint-name="WS_EnviosPort" service-name="ns2:WS_Envios"/>
+                <interface name="ns2:WS_Envios"/>
+            </implementation>
+            <implementation>
+                <by-provider endpoint-name="WS_Solicita_AutorizacionPort" service-name="ns3:WS_Solicita_Autorizacion"/>
+                <interface name="ns3:WS_Solicita_Autorizacion"/>
+            </implementation>
+            <implementation>
+                <by-provider endpoint-name="WSPedidoPort" service-name="ns4:WSPedido"/>
+                <interface name="ns4:WSPedido"/>
+            </implementation>
+        </interface-mapping>
+    </service-assembly>
+</jbi>

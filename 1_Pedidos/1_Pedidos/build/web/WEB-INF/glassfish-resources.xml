@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resources PUBLIC "-//GlassFish.org//DTD GlassFish Application Server 3.1 Resource Definitions//EN" "http://glassfish.org/dtds/glassfish-resources_1_5.dtd">
+<resources>
+    <jdbc-connection-pool 
+        name="derby_net_proj_almacen_appPool" 
+        datasource-classname="org.apache.derby.jdbc.ClientDataSource" 
+        res-type="javax.sql.DataSource"
+        steady-pool-size="8" 
+        max-pool-size="32" 
+        max-wait-time-in-millis="60000" 
+        pool-resize-quantity="2" 
+        idle-timeout-in-seconds="300" 
+        is-connection-validation-required="false" 
+        connection-validation-method="auto-commit" 
+        fail-all-connections="false">
+        <property name="serverName" value="localhost"/>
+        <property name="portNumber" value="1527"/>
+        <property name="databaseName" value="proj_almacen"/>
+        <property name="User" value="app"/>
+        <property name="Password" value="app"/>
+        <property name="URL" value="jdbc:derby://localhost:1527/proj_almacen"/>
+        <property name="driverClass" value="org.apache.derby.jdbc.ClientDriver"/>
+    </jdbc-connection-pool>
+    <jdbc-resource 
+        enabled="true" 
+        jndi-name="java:app/proj_almacen" 
+        object-type="user" 
+        pool-name="derby_net_proj_almacen_appPool"/>
+</resources>

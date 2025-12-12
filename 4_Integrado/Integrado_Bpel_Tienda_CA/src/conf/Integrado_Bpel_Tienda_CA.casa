@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<casa xmlns="http://java.sun.com/xml/ns/casa" xmlns:ns1="http://ws_envios/" xmlns:ns2="http://ws_solicita_autorizacion/" xmlns:ns3="http://wspedido/" xmlns:ns4="Integrado_Bpel_Tienda_CA" xmlns:ns5="http://j2ee.netbeans.org/wsdl/4_Bpel_Tienda/src/BpelIntegrado" xmlns:ns6="http://enterprise.netbeans.org/bpel/4_Bpel_Tienda/4_Bpel_Tienda" xmlns:xlink="http://www.w3.org/2000/xlink">
+    <endpoints>
+        <endpoint endpoint-name="WS_EnviosPort" interface-name="ns1:WS_Envios" name="endpoint1" service-name="ns1:WS_Envios"/>
+        <endpoint endpoint-name="WS_Solicita_AutorizacionPort" interface-name="ns2:WS_Solicita_Autorizacion" name="endpoint2" service-name="ns2:WS_Solicita_Autorizacion"/>
+        <endpoint endpoint-name="WSPedidoPort" interface-name="ns3:WSPedido" name="endpoint3" service-name="ns3:WSPedido"/>
+        <endpoint endpoint-name="casaPort1" interface-name="ns5:BpelIntegradoPortType" name="endpoint4" service-name="ns4:Integrado_Bpel_Tienda_CAService1"/>
+        <endpoint display-name="RecepcionPedidos" endpoint-name="BpelIntegradoPortTypeRole_myRole" file-path="Integrado_Bpel_Tienda.bpel" interface-name="ns5:BpelIntegradoPortType" name="endpoint5" process-name="Integrado_Bpel_Tienda" service-name="ns6:RecepcionPedidos"/>
+        <endpoint display-name="Apoyo_1_Almacen" endpoint-name="WSPedidoRole_partnerRole" file-path="Integrado_Bpel_Tienda.bpel" interface-name="ns3:WSPedido" name="endpoint6" process-name="Integrado_Bpel_Tienda" service-name="ns6:Apoyo_1_Almacen"/>
+        <endpoint display-name="Apoyo_2_Autorizacion" endpoint-name="WS_Solicita_AutorizacionRole_partnerRole" file-path="Integrado_Bpel_Tienda.bpel" interface-name="ns2:WS_Solicita_Autorizacion" name="endpoint7" process-name="Integrado_Bpel_Tienda" service-name="ns6:Apoyo_2_Autorizacion"/>
+        <endpoint display-name="Apoyo_3_Envios" endpoint-name="WS_EnviosRole_partnerRole" file-path="Integrado_Bpel_Tienda.bpel" interface-name="ns1:WS_Envios" name="endpoint8" process-name="Integrado_Bpel_Tienda" service-name="ns6:Apoyo_3_Envios"/>
+    </endpoints>
+    <service-units>
+        <service-engine-service-unit artifacts-zip="Integrado_Bpel_Tienda.jar" component-name="sun-bpel-engine" defined="true" description="Represents this Service Unit" internal="true" name="Integrado_Bpel_Tienda_CA-Integrado_Bpel_Tienda" unit-name="Integrado_Bpel_Tienda" unknown="false" x="126" y="99">
+            <provides endpoint="endpoint5"/>
+            <consumes endpoint="endpoint6"/>
+            <consumes endpoint="endpoint7"/>
+            <consumes endpoint="endpoint8"/>
+        </service-engine-service-unit>
+        <binding-component-service-unit artifacts-zip="sun-http-binding.jar" component-name="sun-http-binding" description="Represents this Service Unit" name="Integrado_Bpel_Tienda_CA-sun-http-binding" unit-name="sun-http-binding">
+            <ports>
+                <port bindingType="soap" x="67" y="353">
+                    <link xlink:href="../jbiasa/Integrado_Bpel_Tienda_CA.wsdl#xpointer(/definitions/service[@name='Integrado_Bpel_Tienda_CAService1']/port[@name='casaPort1'])" xlink:type="simple"/>
+                    <consumes endpoint="endpoint4"/>
+                    <provides endpoint="endpoint4"/>
+                </port>
+                <port x="67" y="197">
+                    <link xlink:href="../jbiServiceUnits/Integrado_Bpel_Tienda/apoyos/1_Almacen/localhost_28346/1_Pedidos/WSPedido.wsdl#xpointer(/definitions/service[@name='WSPedido']/port[@name='WSPedidoPort'])" xlink:type="simple"/>
+                    <consumes endpoint="endpoint3"/>
+                    <provides endpoint="endpoint3"/>
+                </port>
+                <port x="67" y="118">
+                    <link xlink:href="../jbiServiceUnits/Integrado_Bpel_Tienda/apoyos/2_Credito/localhost_28346/2_Autorizaciones/WS_Solicita_Autorizacion.wsdl#xpointer(/definitions/service[@name='WS_Solicita_Autorizacion']/port[@name='WS_Solicita_AutorizacionPort'])" xlink:type="simple"/>
+                    <consumes endpoint="endpoint2"/>
+                    <provides endpoint="endpoint2"/>
+                </port>
+                <port x="67" y="39">
+                    <link xlink:href="../jbiServiceUnits/Integrado_Bpel_Tienda/apoyos/3_Envios/localhost_28346/3_Envios/WS_Envios.wsdl#xpointer(/definitions/service[@name='WS_Envios']/port[@name='WS_EnviosPort'])" xlink:type="simple"/>
+                    <consumes endpoint="endpoint1"/>
+                    <provides endpoint="endpoint1"/>
+                </port>
+            </ports>
+        </binding-component-service-unit>
+    </service-units>
+    <connections>
+        <connection consumer="endpoint8" mode="" provider="endpoint1" route-type="" routing-rule="" state="unchanged"/>
+        <connection consumer="endpoint7" mode="" provider="endpoint2" route-type="" routing-rule="" state="unchanged"/>
+        <connection consumer="endpoint6" mode="" provider="endpoint3" route-type="" routing-rule="" state="unchanged"/>
+        <connection consumer="endpoint4" mode="" provider="endpoint5" route-type="direct" routing-rule="" state="new"/>
+    </connections>
+    <porttypes>
+        <link xlink:href="../jbiasa/Integrado_Bpel_Tienda_CA.wsdl#xpointer(/definitions/portType[@name='dummyCasaPortType'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/Integrado_Bpel_Tienda/apoyos/1_Almacen/localhost_28346/1_Pedidos/WSPedido.wsdl#xpointer(/definitions/portType[@name='WSPedido'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/Integrado_Bpel_Tienda/apoyos/2_Credito/localhost_28346/2_Autorizaciones/WS_Solicita_Autorizacion.wsdl#xpointer(/definitions/portType[@name='WS_Solicita_Autorizacion'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/Integrado_Bpel_Tienda/apoyos/3_Envios/localhost_28346/3_Envios/WS_Envios.wsdl#xpointer(/definitions/portType[@name='WS_Envios'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/Integrado_Bpel_Tienda/BpelIntegrado.wsdl#xpointer(/definitions/portType[@name='BpelIntegradoPortType'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/Integrado_Bpel_Tienda_CA.wsdl#xpointer(/definitions/portType[@name='dummyCasaPortType'])" xlink:type="simple"/>
+    </porttypes>
+    <bindings>
+        <link xlink:href="../jbiasa/Integrado_Bpel_Tienda_CA.wsdl#xpointer(/definitions/binding[@name='casaBinding1'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/Integrado_Bpel_Tienda/apoyos/1_Almacen/localhost_28346/1_Pedidos/WSPedido.wsdl#xpointer(/definitions/binding[@name='WSPedidoPortBinding'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/Integrado_Bpel_Tienda/apoyos/2_Credito/localhost_28346/2_Autorizaciones/WS_Solicita_Autorizacion.wsdl#xpointer(/definitions/binding[@name='WS_Solicita_AutorizacionPortBinding'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/Integrado_Bpel_Tienda/apoyos/3_Envios/localhost_28346/3_Envios/WS_Envios.wsdl#xpointer(/definitions/binding[@name='WS_EnviosPortBinding'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/Integrado_Bpel_Tienda_CA.wsdl#xpointer(/definitions/binding[@name='casaBinding1'])" xlink:type="simple"/>
+    </bindings>
+    <services>
+        <link xlink:href="../jbiasa/Integrado_Bpel_Tienda_CA.wsdl#xpointer(/definitions/service[@name='Integrado_Bpel_Tienda_CAService1'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/Integrado_Bpel_Tienda/apoyos/1_Almacen/localhost_28346/1_Pedidos/WSPedido.wsdl#xpointer(/definitions/service[@name='WSPedido'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/Integrado_Bpel_Tienda/apoyos/2_Credito/localhost_28346/2_Autorizaciones/WS_Solicita_Autorizacion.wsdl#xpointer(/definitions/service[@name='WS_Solicita_Autorizacion'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/Integrado_Bpel_Tienda/apoyos/3_Envios/localhost_28346/3_Envios/WS_Envios.wsdl#xpointer(/definitions/service[@name='WS_Envios'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/Integrado_Bpel_Tienda_CA.wsdl#xpointer(/definitions/service[@name='Integrado_Bpel_Tienda_CAService1'])" xlink:type="simple"/>
+    </services>
+    <regions>
+        <region name="WSDL Endpoints" width="150"/>
+        <region name="JBI Modules" width="500"/>
+        <region name="External Modules" width="200"/>
+    </regions>
+</casa>
