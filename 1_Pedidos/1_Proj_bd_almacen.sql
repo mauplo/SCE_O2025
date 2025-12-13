@@ -5,7 +5,6 @@ DROP TABLE customer_order;
 DROP TABLE product;
 DROP TABLE category;
 DROP TABLE customer;
-DROP SEQUENCE num_conf;
 
 CREATE SEQUENCE num_conf AS INT START WITH 1 INCREMENT BY 1;
 
@@ -98,7 +97,9 @@ INSERT INTO product (name, price, description, last_update, category_id, existen
 ('Super Saver', 60.00, 'Económico y duradero', TIMESTAMP('2025-01-01 09:00:00'), 3, 10, 'Medio (4)', '100% Acrilico', 'Red Heart', 'LOTE-D4', 0, 0.00), -- Poca existencia para probar sustitutos
 ('Baby Soft', 55.00, 'Antialergico colores pastel', TIMESTAMP('2025-01-01 09:00:00'), 3, 900, 'Ligero (3)', '100% Acrilico', 'Cisne', 'LOTE-E5', 0, 0.00),
 ('Wool-Ease', 110.00, 'Calidez de lana facil cuidado', TIMESTAMP('2025-01-01 09:00:00'), 4, 400, 'Abultado (5)', '80% Acrilico 20% Lana', 'Lion Brand', 'LOTE-F6', 1, 0.05),
-('Mandala Ombre', 180.00, 'Cambios de color degradados', TIMESTAMP('2025-01-01 09:00:00'), 4, 350, 'Medio (4)', 'Acrilico Premium', 'Lion Brand', 'LOTE-G7', 0, 0.00);
+('Mandala Ombre', 180.00, 'Cambios de color degradados', TIMESTAMP('2025-01-01 09:00:00'), 4, 350, 'Medio (4)', 'Acrilico Premium', 'Lion Brand', 'LOTE-G7', 0, 0.00),
+('Super Saver Plus', 62.00, 'mismo grosor y fibra que Super Saver', TIMESTAMP('2025-01-01 09:00:00'),3, 500, 'Medio (4)', '100% Acrilico', 'Red Heart', 'LOTE-D5', 0, 0.00);
+
 
 ------------------------------- 
 --     ORDERED_PRODUCTS
