@@ -42,4 +42,5 @@ estresador %1 %cp% %cb% example.hello.Distribuidor Cliente_Des %3 %2 %POJO%
 @echo off
 echo.
 echo === Test completado ===
+
 pause
