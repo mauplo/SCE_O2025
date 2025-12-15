@@ -10,6 +10,23 @@ Este repositorio contiene toda la información, entregables y lineamientos para 
 
 ---
 
+## Estructura del repositorio
+
+```
+SCE_O2025/
+│
+├── 1_Pedidos/           # WS y POJO de Pedidos
+├── 2_Autorizaciones/    # WS y POJO de Autorización
+├── 3_Envios/            # WS y POJO de Envíos
+├── 4_Integrado/         # BPEL y CA
+├── FormatosParaProy../  # Documentación
+├── InterfazDesacoplada/ # Interfaz para POJOs
+├── docs/                # Documentación adicional, diagramas, recursos
+└── README.md            # Este archivo
+```
+
+---
+
 ## Documentación principal
 
 A continuación se encuentran los enlaces a los documentos principales del proyecto:
@@ -102,23 +119,6 @@ TODO está en el documento FormatosParaProyectoFinal_Documentacion.docx
 
 - [X] Script, Proceso y Pojos de estress;
 - [X] Tabla con resultados de las Pruebas de Estress para las versiones estables.
-
----
-
-## Estructura del repositorio
-
-```
-SCE_O2025/
-│
-├── 1_Pedidos/           # WS y POJO de Pedidos
-├── 2_Autorizaciones/    # WS y POJO de Autorización
-├── 3_Envios/            # WS y POJO de Envíos
-├── 4_Integrado/         # BPEL y CA
-├── FormatosParaProy../  # Documentación
-├── InterfazDesacoplada/ # Interfaz para POJOs
-├── docs/                # Documentación adicional, diagramas, recursos
-└── README.md            # Este archivo
-```
 
 ---
 
