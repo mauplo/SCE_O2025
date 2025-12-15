@@ -23,84 +23,85 @@ A continuación se encuentran los enlaces a los documentos principales del proye
 ## Entregables del Proyecto
 
 Esta sección resume todos los entregables esperados y su status: completado/faltante.
+TODO está en el documento FormatosParaProyectoFinal_Documentacion.docx
 
 ### 1. Control del Proyecto
 
-- [ ] Plan de Trabajo en Excel. **[Plan de Trabajo](https://itam2-my.sharepoint.com/:x:/g/personal/mauricia_pena_itam_mx/EZKX-tA5iQBDp5gFwEEe9qUBdBMM6JRz1Fy_mODThtlhSA?e=6CQH8m)**
+- [X] Plan de Trabajo en Excel. **[Plan de Trabajo](https://itam2-my.sharepoint.com/:x:/g/personal/mauricia_pena_itam_mx/EZKX-tA5iQBDp5gFwEEe9qUBdBMM6JRz1Fy_mODThtlhSA?e=6CQH8m)**
 
 ### 2. Requerimientos de Negocio
 
-- [ ] Documento de Requerimientos de Negocio en formato tabular simple. **[Reglas de Negocio](docs/requerimientosFuncionales.md)**
-- [ ] Requerimientos no funcionales: Volumetrics (Cantidad esperada y máxima de transacciones y de qué tipo) **[Reglas NF](docs/requerimientosNoFuncionales.md)**
+- [X] Documento de Requerimientos de Negocio en formato tabular simple. **[Reglas de Negocio](docs/requerimientosFuncionales.md)**
+- [X] Requerimientos no funcionales: Volumetrics (Cantidad esperada y máxima de transacciones y de qué tipo) **[Reglas NF](docs/requerimientosNoFuncionales.md)**
 
 ### 3. **Casos de Uso / Historias de Usuario**
 
-- [ ] Happy Path **[Happy Paths](docs/happyPaths.md)**
-- [ ] Rutas Alternas para Reglas de Negocio **[Rutas Alternas](docs/rutasAlternas.md)**
+- [X] Happy Path **[Happy Paths](docs/happyPaths.md)**
+- [X] Rutas Alternas para Reglas de Negocio **[Rutas Alternas](docs/rutasAlternas.md)**
 
 ### 4. **Documento de Arquitectura**
 
-- [ ] Bosquejo de Arquitectura con los nombres de los componentes con descripción breve del componente con tecnología de soporte;
+- [X] Bosquejo de Arquitectura con los nombres de los componentes con descripción breve del componente con tecnología de soporte;
 
 ### 5. Responsabilidades de Componentes de Arquitectura y relación con reglas de Negocio
 
-- [ ] Tabla con los componentes de Arquitectura con:
-- [ ] Responsabilidades en cuanto a requerimientos funcionales;
-- [ ] Responsabilidades en cuanto a requerimientos no funcionales.
+- [X] Tabla con los componentes de Arquitectura con:
+- [X] Responsabilidades en cuanto a requerimientos funcionales;
+- [X] Responsabilidades en cuanto a requerimientos no funcionales.
 
 ### 6. **Implementación del Sistema**
 
-- [ ] Tabla de detalle de plan de trabajo con bitácora diaria de avance de las actividades y desviaciones del proyecto. 
+- [X] Tabla de detalle de plan de trabajo con bitácora diaria de avance de las actividades y desviaciones del proyecto. 
 
 ### 7. **Documentación de pruebas funcionales**
 
-- [ ] Batería de pruebas Funcionales por servicio de negocio y en general:
-- [ ] Descripción del “Steady State” para cada caso;
-- [ ] Script de carga de Bases de datos para “Steady State”;
-- [ ] Transacciones habituales
-- [ ] Datos a inyectar;
-- [ ] Respuesta esperada y forma de verificación;
-- [ ] Proceso automatizado de detección de cumplimiento.
+- [X] Batería de pruebas Funcionales por servicio de negocio y en general:
+- [X] Descripción del “Steady State” para cada caso;
+- [X] Script de carga de Bases de datos para “Steady State”;
+- [X] Transacciones habituales
+- [X] Datos a inyectar;
+- [X] Respuesta esperada y forma de verificación;
+- [X] Proceso automatizado de detección de cumplimiento.
 
 ### 8. **Documentación de pruebas No Funcionales**
 
-- [ ] Descripción de carga para la prueba no funcional:
-- [ ] Volumetrics por tipo de transacción para cada servicio;
-- [ ] Condiciones de “Steady State” y Scipt de carga de Bases de Datos;
-- [ ] Volumetrics por tipo de transacción y modalidad para servicio integrado
+- [X] Descripción de carga para la prueba no funcional:
+- [X] Volumetrics por tipo de transacción para cada servicio;
+- [X] Condiciones de “Steady State” y Scipt de carga de Bases de Datos;
+- [X] Volumetrics por tipo de transacción y modalidad para servicio integrado
 
 ### 9. **Arquitectura y control de versiones**
 
-- [ ] Bitácora de Entregas y desviaciones de Integración con:
-- [ ] Entregas y versiones de componentes;
-- [ ] Instalación de la versión “Steady” para cada entrega parcial;
-- [ ] Cumplimiento con la integración.
+- [X] Bitácora de Entregas y desviaciones de Integración con:
+- [X] Entregas y versiones de componentes;
+- [X] Instalación de la versión “Steady” para cada entrega parcial;
+- [X] Cumplimiento con la integración.
 
 ### 10. **Documento y componente del WS de Almacen**
 
-- [ ] Documento de Arquitectura del servicio con:
-- [ ] Relación a Reglas y Requerimientos de Negocio;
-- [ ] Pruebas funcionales
-- [ ] Pruebas No Funcionales.
+- [X] Documento de Arquitectura del servicio con:
+- [X] Relación a Reglas y Requerimientos de Negocio;
+- [X] Pruebas funcionales
+- [X] Pruebas No Funcionales.
 
 ### 11. **Documento y componente del WS de Pagos**
 
-- [ ] Documento de Arquitectura del servicio con:
-- [ ] Relación a Reglas y Requerimientos de Negocio;
-- [ ] Pruebas funcionales
-- [ ] Pruebas No Funcionales.
+- [X] Documento de Arquitectura del servicio con:
+- [X] Relación a Reglas y Requerimientos de Negocio;
+- [X] Pruebas funcionales
+- [X] Pruebas No Funcionales.
 
 ### 12. **Documento y componente del WS de Entregas**
 
-- [ ] Documento de Arquitectura del servicio con:
-- [ ] Relación a Reglas y Requerimientos de Negocio;
-- [ ] Pruebas funcionales
-- [ ] Pruebas No Funcionales.
+- [X] Documento de Arquitectura del servicio con:
+- [X] Relación a Reglas y Requerimientos de Negocio;
+- [X] Pruebas funcionales
+- [X] Pruebas No Funcionales.
 
 ### 13. **Documento de Estress a cada servicio**
 
-- [ ] Script, Proceso y Pojos de estress;
-- [ ] Tabla con resultados de las Pruebas de Estress para las versiones estables.
+- [X] Script, Proceso y Pojos de estress;
+- [X] Tabla con resultados de las Pruebas de Estress para las versiones estables.
 
 ---
 
@@ -109,12 +110,13 @@ Esta sección resume todos los entregables esperados y su status: completado/fal
 ```
 SCE_O2025/
 │
+├── 1_Pedidos/           # WS y POJO de Pedidos
+├── 2_Autorizaciones/    # WS y POJO de Autorización
+├── 3_Envios/            # WS y POJO de Envíos
+├── 4_Integrado/         # BPEL y CA
+├── FormatosParaProy../  # Documentación
+├── InterfazDesacoplada/ # Interfaz para POJOs
 ├── docs/                # Documentación adicional, diagramas, recursos
-├── backend/             # Código fuente del backend
-├── frontend/            # Código del frontend (si aplica)
-├── bpel/                # Procesos BPEL, WSDL, XSD
-├── database/            # Scripts SQL y diagramas
-├── testing/             # Casos de prueba y evidencia
 └── README.md            # Este archivo
 ```
 
