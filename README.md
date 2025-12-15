@@ -136,13 +136,3 @@ Resumen:
 * **Documentación** – Mantener actualizado SharePoint y el repositorio
 
 ---
-
-## Flujo de trabajo del equipo
-
-1. **Revisión del plan de trabajo**
-2. **Asignación de tareas** según responsabilidades
-3. **Integración en ramas individuales → revisión → merge**
-4. **Documentación continua en SharePoint**
-5. **Entrega formal de componentes** según fechas
-
----
