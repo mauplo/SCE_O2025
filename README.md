@@ -19,9 +19,10 @@ SCE_O2025/
 ├── 2_Autorizaciones/    # WS y POJO de Autorización
 ├── 3_Envios/            # WS y POJO de Envíos
 ├── 4_Integrado/         # BPEL y CA
+├── SimpleRMIAutonomo/   # Carpeta para pruebas de estresamiento con POJOs y bats
+├── docs/                # Documentación adicional, diagramas, recursos
 ├── FormatosParaProy../  # Documentación
 ├── InterfazDesacoplada/ # Interfaz para POJOs
-├── docs/                # Documentación adicional, diagramas, recursos
 └── README.md            # Este archivo
 ```
 
