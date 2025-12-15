@@ -41,7 +41,7 @@ A continuación se encuentran los enlaces a los documentos principales del proye
 ## Entregables del Proyecto
 
 Esta sección resume todos los entregables esperados y su status: completado/faltante.
-TODO está en el documento FormatosParaProyectoFinal_Documentacion.docx
+TODO está en el documento FormatosParaProyectoFinal_Documentacion.pdf
 
 ### 1. Control del Proyecto
 
