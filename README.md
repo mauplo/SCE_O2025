@@ -146,15 +146,3 @@ Resumen:
 5. **Entrega formal de componentes** según fechas
 
 ---
-
-## Notas importantes para el equipo
-
-* Mantener toda la evidencia y documentación dentro de las carpetas oficiales.
-* Actualizar este README cuando surja un entregable nuevo.
-* Todo componente debe incluir al menos:
-
-  * Descripción
-  * Instrucciones de ejecución
-  * Dependencias
-
----
